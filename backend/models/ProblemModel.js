@@ -1,4 +1,4 @@
-const mongoose=require(mongoose);
+const mongoose=require('mongoose');
 const ProblemSchema=new mongoose.Schema({
   title:{
     type:String,
