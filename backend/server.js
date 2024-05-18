@@ -3,9 +3,17 @@ const mongoose=require('mongoose');
 const dotenv=require('dotenv');
 const path=require('path');
 const { type } = require('os');
+const authRoute=require(path.join(__dirname,'routes','authRoutes.js'));
+const userRoute=require(path.join(__dirname,'routes','userRoutes.js'));
+const problemRoute=require(path.join(__dirname,'routes','problemRoutes.js'));
 
 const app=express();
 dotenv.config();
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+
 
 const PORT=process.env.PORT || 7000;
 const MONGODB_STRING=process.env.MONGODB_STRING;
@@ -18,6 +26,11 @@ then(conn=>{
   console.log("connected to mongoDB"); 
 })
 
+
+
+app.use('/auth',authRoute);
+app.use('/user',userRoute);
+app.use('/problem',problemRoute);
 
 
 
