@@ -9,7 +9,14 @@ const SubmissionSchema=new mongoose.Schema({
     required:true
   },
   verdict:{
-    type:string
+    type:String
+  },
+  problemId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'ProblemModel'
+  },
+  username:{
+    type:String
   }
 });
 const SubmissionModel=mongoose.model('SubmissionModel',SubmissionSchema);
