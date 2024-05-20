@@ -1,6 +1,7 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const dotenv=require('dotenv');
+const cookieparser=require('cookie-parser');
 const path=require('path');
 const { type } = require('os');
 const authRoute=require(path.join(__dirname,'routes','authRoutes.js'));
@@ -12,7 +13,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use(cookieparser());
 
 
 const PORT=process.env.PORT || 7000;
