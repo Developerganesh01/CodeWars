@@ -4,7 +4,23 @@ const jwt=require('jsonwebtoken');
 
 
 router.get('/getall',async function(req,res){
-  //send problems for home page
+
+  //before check whether is authenticated or not
+
+  //extract token from cookie
+  const {token}=req.cookies;
+  const payload=jwt.verify(token,process.env.SECRET_KEY);
+  if(!payload)
+    {
+      //if verify fails it returns nothing so we don't have payload 
+      //return error
+      return res.status(400).send("unauthcated user");
+    }
+    //user is authencated now send 10 problems randomly
+    //[{},{},.....] send array of problems which contains only problem title and problem rating
+    const problemData=await ProblemModel.find({},'id title rating').limit(10);
+    res.status(200).json(problemData);
+
 });
 router.post('/create',async function(req,res){
 
@@ -12,7 +28,7 @@ router.post('/create',async function(req,res){
   
   //verify jwt
   //extract token from cookies
-  console.log(req.cookies);
+  // console.log(req.cookies);
   const {token}=req.cookies;
   const payload=jwt.verify(token,process.env.SECRET_KEY);
   console.log(payload);
