@@ -18,6 +18,8 @@ router.get('/getall',async function(req,res){
     }
     //user is authencated now send 10 problems randomly
     //[{},{},.....] send array of problems which contains only problem title and problem rating
+    //in find provide string for projection
+    //when we use limit without sort random 10 documents will be fetched
     const problemData=await ProblemModel.find({},'id title rating').limit(10);
     res.status(200).json(problemData);
 
