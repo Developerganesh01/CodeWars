@@ -1,0 +1,13 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.header{
+  background-color:#0E46A3;
+}
+.main{
+  background-color:#E1F7F5;
+  min-height: 91vh;
+}

@@ -1,0 +1,21 @@
+.header-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+}
+ul{
+  list-style: none;
+}
+a{
+  color: #fff;
+  font-size: 2rem;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.active-btn{
+  color:#fff;
+  border-bottom: 0.3rem solid #fff;
+  padding-bottom: 0.2rem;
+  font-weight: bold;
+}
