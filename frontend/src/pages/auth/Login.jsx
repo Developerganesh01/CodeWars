@@ -8,7 +8,7 @@ function Login()
   const navigate=useNavigate();
   if(!loading)
     {
-      navigate('/home');
+      navigate('/');
     }
   function handleChange(e)
   {
@@ -29,6 +29,7 @@ function Login()
         headers:{
           'Content-Type':'application/json'
         },
+        credentials:'include',
         body:JSON.stringify({
           username:formData.username,
           password:formData.password
@@ -50,13 +51,14 @@ function Login()
     <form onSubmit={handleSubmit} className={styles["form-box"]}>
       <div className={styles["form-box__input-box"]}>
         <label htmlFor="username">username :</label>
-        <input id="username"type="text" name="username" placeholder="username" onChange={handleChange} />
+        <input required id="username"type="text" name="username" placeholder="username" onChange={handleChange} />
       </div>
       <div className={styles["form-box__input-box"]}>
         <label htmlFor="password">password :</label>
-        <input id="password" name="password" type="password" onChange={handleChange}/>
+        <input required id="password" name="password" type="password" onChange={handleChange}/>
       </div>
-      <button type="submit" className={styles["form-btn"]}>Sign Up</button>
+      <button type="submit" className={styles["form-btn"]}>Login</button>
+      <a href="/signup">signup ?</a>
     </form>
   );
 }

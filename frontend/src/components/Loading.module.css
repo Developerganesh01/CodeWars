@@ -1,6 +1,13 @@
 .loading-box{
   width: 100%;
-  height: 100%;
   background-color:#1E0342;
   color:#fff;
+  height: 89vh;
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+  font-size: 3rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

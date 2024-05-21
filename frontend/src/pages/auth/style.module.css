@@ -26,8 +26,9 @@
   color: black;
   background-color: #fff;
   border:0.1rem solid black;
-  padding: 0.3rem;
+  padding: 0.5rem;
   border-radius: 1rem;
+  width: 10rem;
 
 }
 label{

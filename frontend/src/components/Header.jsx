@@ -5,7 +5,7 @@ function Header()
 {
   return (
     <ul className={styles["header-container"]}>
-      <li><NavLink to="/home" className={({isActive})=>{
+      <li><NavLink to="/" className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
       }}>Home</NavLink></li>
       <li><NavLink to="/submission"className={({isActive})=>{
