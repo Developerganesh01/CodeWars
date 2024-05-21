@@ -1,7 +1,8 @@
+import styles from "./Loading.module.css";
 function Loading()
 {
-  return (<h3>
-    loading..
-  </h3>)
+  return (<p className={styles["loading-box"]}>
+    loading . . .
+  </p>)
 }
 export default Loading;

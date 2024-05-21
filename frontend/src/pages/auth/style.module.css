@@ -1,0 +1,49 @@
+.form-box{
+  width: 50vw;
+  min-height: 50vh;
+  background-color:slateblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: absolute;
+  top:25%;
+  left: 25%;
+}
+.form-box__input-box{
+  width: 100%;
+  font-size: 2rem;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.form-btn{
+  font-size: 1.6rem;
+  color: black;
+  background-color: #fff;
+  border:0.1rem solid black;
+  padding: 0.3rem;
+  border-radius: 1rem;
+
+}
+label{
+  font-weight: 900;
+  padding: 0.3rem;
+  display: block;
+  width: 20%;
+  margin-left: 1rem;
+  margin-right: 0.1rem;
+  text-align:start;
+}
+input{
+  width: 40%;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+}
+input::placeholder{
+  letter-spacing: 0.3rem;
+}

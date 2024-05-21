@@ -17,5 +17,6 @@ a{
   color:#fff;
   border-bottom: 0.3rem solid #fff;
   padding-bottom: 0.2rem;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-weight: 800;
 }
