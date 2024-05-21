@@ -9,6 +9,10 @@ router.get('/getall',async function(req,res){
 
   //extract token from cookie
   const {token}=req.cookies;
+  if(!token)
+    {
+      return res.status(400).send("token expired or not present")
+    }
   const payload=jwt.verify(token,process.env.SECRET_KEY);
   if(!payload)
     {
@@ -20,7 +24,7 @@ router.get('/getall',async function(req,res){
     //[{},{},.....] send array of problems which contains only problem title and problem rating
     //in find provide string for projection
     //when we use limit without sort random 10 documents will be fetched
-    const problemData=await ProblemModel.find({},'id title rating').limit(10);
+    const problemData=await ProblemModel.find({},'_id title rating').limit(10);
     res.status(200).json(problemData);
 
 });
