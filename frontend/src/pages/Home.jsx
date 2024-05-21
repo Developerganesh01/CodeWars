@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 import Loading from "../components/Loading";
+import Problem from "../components/Problem";
 function Home() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState(true);
-const[problems,setProblems]=useState(null);
+const[problemsData,setProblemsData]=useState(null);
   useEffect(()=>{
 
     async function getData(){
@@ -17,9 +18,9 @@ const[problems,setProblems]=useState(null);
           credentials:'include'
         }
       );
-      setLoading(false);
       if(!response.ok)
         {
+          setLoading(false);
           setAuth(false);
           return ;
         }else{
@@ -27,16 +28,16 @@ const[problems,setProblems]=useState(null);
         }
         const data=await response.json();
         //id title rating
+        let ct=1;
         const temp=data.map((obj)=>{
+          obj.ct=ct;
+          ct=ct+1;
           return (
-            <div >
-              <p>problemId :{obj._id}</p>
-              <p>title :{obj.title}</p>
-              <p>rating :{obj.rating}</p>
-            </div>
+              <Problem obj={obj}/>
           )
         })
-        setProblems(temp);
+        setProblemsData(temp);
+        setLoading(false);
     }
     getData();
   },[]);
@@ -50,7 +51,7 @@ const[problems,setProblems]=useState(null);
   }
   return (
          <div className={styles["home-container"]}>
-          {problems}
+          {problemsData}
          </div>
          );
 }
