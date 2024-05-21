@@ -23,6 +23,7 @@ function App() {
         <Route path="submission" element={<Submission/>}/>
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
+        <Route path="problem/:id" element={<Submission/>} />
       </Route>
       
     </Routes>

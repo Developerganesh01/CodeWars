@@ -10,7 +10,7 @@ function Header()
       }}>Home</NavLink></li>
       <li><NavLink to="/submission"className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
-      }}>Submission</NavLink></li>
+      }}>Submissions</NavLink></li>
       <li><NavLink to="/dashboard" className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
       }}>Dashboard</NavLink></li>
