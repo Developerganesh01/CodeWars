@@ -65,6 +65,30 @@ router.post('/create',async function(req,res){
   res.status(201).json(newproblem);
 })
 
+router.get('/:id',async function(req,res){
+  const {id}=req.params;
+  //got problemId
+  //send title,problemDescription,input,output
+  //send json object containig this keys
+  const {token}=req.cookies;
+  if(!token)
+    {
+      res.status(400).send("don't have token");
+      return ;
+    }
+    const payload=jwt.verify(token,process.env.SECRET_KEY);
+    if(!payload)
+      {
+        return res.status(400).send("token verification failed");
+      }
+    const obj=await ProblemModel.findOne({_id:id});
+    //if object is empty
+    if(!obj.title)
+      {
+        return res.status(400).send("invalid problem id");
+      }
+    res.status(200).json(obj);
 
+})
 
 module.exports=router;
