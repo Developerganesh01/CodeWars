@@ -1,0 +1,39 @@
+
+.problemdesc-container{
+  width: 100%;
+  background-color:#E1F7F5;
+  color: #fff;
+  height: 89vh;
+  display: flex;
+  justify-content: space-between;
+}
+.problemdesc-container__left{
+  width: 50%;
+  background-color:#333;
+  text-align: center;
+  margin-top: 1rem;
+  border: 0.5rem solid black;
+}
+.problemdesc-container__left textarea{
+  margin-top: 3rem;
+  height: 70vh;
+  resize: none;
+  width: 100%;
+  padding: 1rem;
+}
+.problemdesc-container__right{
+  width: 49%;
+  color: black;
+  font-size: 2rem;
+  text-align: center;
+}
+.pdesc-footer{
+  text-align: center;
+}
+.pdesc-footer button{
+  margin-top: 1rem;
+  padding: 1rem;
+  margin-right: 1rem;
+  width: 6rem;
+  transform: translateX(-50%);
+}
