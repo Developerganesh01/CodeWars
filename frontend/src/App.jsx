@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp"
 import "./App.css"
+import ProblemDesc from "./pages/ProblemDesc";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route path="submission" element={<Submission/>}/>
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
-        <Route path="problem/:id" element={<Submission/>} />
+        <Route path="problem/:id" element={<ProblemDesc/>} />
       </Route>
       
     </Routes>
