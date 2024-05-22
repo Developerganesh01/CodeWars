@@ -1,0 +1,46 @@
+.problemdesc-box{
+  width: 100%;
+  height:90vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+}
+.problemtitle-box{
+  font-weight: 600;
+  font-size: 2rem;
+  height: 7vh;
+
+}
+.problemstatement-box{
+  height: 43vh;
+  margin-top: 1rem;
+  text-align: center;
+
+}
+.problemio-box{
+  height: 40vh;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.probleminput-box{
+  background-color:#ccc;
+  width: 48%;
+  border: 1rem solid black;
+
+}
+.problemoutput-box{
+  background-color:#ccc;
+  width: 48%;
+  border: 1rem solid black;
+}
+.probleminput-box p ,.problemoutput-box p{
+  margin-bottom: 3rem;
+}
+.problemio-box textarea{
+  width: 100%;
+  resize: none;
+  height:30vh;
+  padding: 1rem;
+}
