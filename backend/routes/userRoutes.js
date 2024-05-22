@@ -4,7 +4,9 @@ const router=require('express').Router();
 const jwt=require('jsonwebtoken');
 const ProblemModel=require('../models/ProblemModel');
 const SubmissionModel=require('../models/SubmissionModel');
-
+const path=require('path');
+const {writeFile}=require('node:fs/promises')
+const { exec, spawn, fork, execFile } = require('promisify-child-process')
 //from jwt token we will get payload which contains some user information
 //here it's username 
 
@@ -94,5 +96,41 @@ res.status(201).json(submission);
 })
 
 
+
+
+//handle run
+
+
+router.post('/run/:id',async function(req,res){
+
+  //without saving in submission collection send output by running code 
+  // console.log(req.body);
+  const {code,input}=req.body;
+  const {id}=req.params;
+  //create file in code folder and write code in that file
+  const codefilepath=path.join(__dirname,'..','code',`f${id}.cpp`);
+  const exefilepath=path.join(__dirname,'..','code',`f${id}.exe`);
+  try{
+    await writeFile(codefilepath,code);
+    const child=exec(`g++ ${codefilepath} -o ${exefilepath} && ${exefilepath}`);
+    child.stdin.write(input);
+    child.stdin.end();
+      const {stdout,stderr}=await child;
+      if(stderr)
+        {
+          console.log(stderr);
+          return res.status(200).json({
+            output:"compilation error"
+          })
+        }
+        res.status(200).json({
+          output:stdout
+        })
+  }catch(err)
+  {
+    console.log(err);
+    return res.status(400).send("something wrong");
+  }
+})
 
 module.exports=router;
