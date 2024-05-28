@@ -11,6 +11,7 @@ function ProblemDesc()
   const[auth,setAuth]=useState(false);
   const[code,setCode]=useState("");
   const[descData,setdescData]=useState(null);
+  const[verdict,setVerdict]=useState("");
   const navigate=useNavigate();
   useEffect(()=>{
 
@@ -61,7 +62,7 @@ function ProblemDesc()
       function handleCodeChange(e)
       {
         setCode(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
       }
       //handleRun
       async function handleRun()
@@ -93,9 +94,25 @@ function ProblemDesc()
           console.log('ok from client side');
       }
       //handleSubmit
-      function handleSubmit()
+     async function handleSubmit()
       {
-        window.alert("baby ,Calm down !!!😩😩")
+        //send code
+        const response=await fetch(`http://localhost:4000/user/submit/${id}`,{
+          method:'POST',
+          credentials:'include',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+            code
+          })
+        });
+        if(!response.ok)
+          {
+            setVerdict('wrong answer');
+          }else{
+            setVerdict('accepted');
+          }
       }
   return(
     <div className={styles["problemdesc-container"]}>
@@ -105,6 +122,7 @@ function ProblemDesc()
         <div className={styles["pdesc-footer"]}>
           <button onClick={handleRun}>Run</button>
           <button onClick={handleSubmit}>Submit</button>
+          <p className={verdict?(verdict==='accepted'?styles["act"]:styles["nact"]):""}>{verdict}</p>
         </div>
       </div>
       <div className={styles["problemdesc-container__right"]}>

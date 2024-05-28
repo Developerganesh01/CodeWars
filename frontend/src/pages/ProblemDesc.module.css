@@ -9,7 +9,7 @@
 }
 .problemdesc-container__left{
   width: 50%;
-  background-color:#333;
+  background-color:#999;
   text-align: center;
   margin-top: 1rem;
   border: 0.5rem solid black;
@@ -29,6 +29,9 @@
 }
 .pdesc-footer{
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .pdesc-footer button{
   margin-top: 1rem;
@@ -36,4 +39,24 @@
   margin-right: 1rem;
   width: 6rem;
   transform: translateX(-50%);
+}
+.act{
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  background-color:#28b485;
+  padding: 0.8rem;
+  font-weight:bold;
+}
+.act::after{
+  content: "✅";
+}
+.nact{
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  background-color:#ffb900;;
+  padding: 0.8rem;
+  font-weight:bold;
+}
+.nact::after{
+  content:"❌";
 }

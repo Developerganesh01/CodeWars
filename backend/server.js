@@ -8,6 +8,7 @@ const { type } = require('os');
 const authRoute=require(path.join(__dirname,'routes','authRoutes.js'));
 const userRoute=require(path.join(__dirname,'routes','userRoutes.js'));
 const problemRoute=require(path.join(__dirname,'routes','problemRoutes.js'));
+const testcaseRoute=require(path.join(__dirname,'routes','testcaseRoutes.js'));
 
 const app=express();
 dotenv.config();
@@ -39,6 +40,7 @@ then(conn=>{
 app.use('/auth',authRoute);
 app.use('/user',userRoute);
 app.use('/problem',problemRoute);
+app.use('/testcase',testcaseRoute);
 
 
 
