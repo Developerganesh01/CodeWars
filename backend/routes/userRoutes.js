@@ -104,12 +104,7 @@ router.post("/submit/:id", async function (req, res) {
   //compile first
   await writeFile(codefilepath, code);
   const child = exec(`g++ ${codefilepath} -o ${exefilepath}`);
-  try {
     const { stdout, stderr } = await child;
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send("error");
-  }
   if (stderr) {
     console.log(stderr.split("\n"));
     res.status(400).send("compilation error");
