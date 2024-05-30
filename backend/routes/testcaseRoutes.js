@@ -1,19 +1,8 @@
 const router=require('express').Router();
-const TestCaseModel=require('../models/TestcaseModel');
+const path=require("path");
+const {create}=require(path.join(__dirname,"..","controllers","testcaseController"));
 
 
-
-router.post('/create',async function(req,res)
-{
-  const {problemId,input,output}=req.body;
-  const newtestcase=new TestCaseModel({
-    input,
-    output,
-    problemId
-  })
-
-  await newtestcase.save();
-  res.status(201).json(newtestcase);
-})
+router.post('/create',create);
 
 module.exports=router;

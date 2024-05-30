@@ -1,94 +1,10 @@
 const router=require('express').Router();
-const ProblemModel=require('../models/ProblemModel');
-const jwt=require('jsonwebtoken');
+const path=require("path");
 
+const {getAll,getDescription,create}=require(path.join(__dirname,"..","controllers","problemController.js"))
 
-router.get('/getall',async function(req,res){
-
-  //before check whether is authenticated or not
-
-  //extract token from cookie
-  const {token}=req.cookies;
-  if(!token)
-    {
-      return res.status(400).send("token expired or not present")
-    }
-  const payload=jwt.verify(token,process.env.SECRET_KEY);
-  if(!payload)
-    {
-      //if verify fails it returns nothing so we don't have payload 
-      //return error
-      return res.status(400).send("unauthcated user");
-    }
-    //user is authencated now send 10 problems randomly
-    //[{},{},.....] send array of problems which contains only problem title and problem rating
-    //in find provide string for projection
-    //when we use limit without sort random 10 documents will be fetched
-    const problemData=await ProblemModel.find({},'_id title rating').limit(10);
-    res.status(200).json(problemData);
-
-});
-router.post('/create',async function(req,res){
-
-  //check whether user is authenticated and have permission to do that or not
-  
-  //verify jwt
-  //extract token from cookies
-  // console.log(req.cookies);
-  const {token}=req.cookies;
-  const payload=jwt.verify(token,process.env.SECRET_KEY);
-  console.log(payload);
-  //create problem and return 
-  //req.body contains dfetails
-  const{title,description,sampleinput,sampleoutput,rating}=req.body;
-  if(!(title && description &&sampleinput &&sampleoutput &&rating))
-    {
-      return res.status(400).send("provide all details for problem");
-    }
-  const problem={
-    title,
-    description,
-    sampleinput,
-    sampleoutput,
-    rating    
-  };
-
-  const newproblem=new ProblemModel(problem);
-  try{
-    await newproblem.save();
-  }
-  catch(err)
-  {
-    console.log(err);
-    res.status(400).send("something went wrong");
-  }
-  res.status(201).json(newproblem);
-})
-
-router.get('/:id',async function(req,res){
-  const {id}=req.params;
-  //got problemId
-  //send title,problemDescription,input,output
-  //send json object containig this keys
-  const {token}=req.cookies;
-  if(!token)
-    {
-      res.status(400).send("don't have token");
-      return ;
-    }
-    const payload=jwt.verify(token,process.env.SECRET_KEY);
-    if(!payload)
-      {
-        return res.status(400).send("token verification failed");
-      }
-    const obj=await ProblemModel.findOne({_id:id});
-    //if object is empty
-    if(!obj.title)
-      {
-        return res.status(400).send("invalid problem id");
-      }
-    res.status(200).json(obj);
-
-})
+router.get("/getall",getAll);
+router.post("/create",create);
+router.get("/:id",getDescription);
 
 module.exports=router;

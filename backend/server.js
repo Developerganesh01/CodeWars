@@ -4,11 +4,17 @@ const dotenv=require('dotenv');
 const cookieparser=require('cookie-parser');
 const cors=require('cors');
 const path=require('path');
-const { type } = require('os');
-const authRoute=require(path.join(__dirname,'routes','authRoutes.js'));
-const userRoute=require(path.join(__dirname,'routes','userRoutes.js'));
-const problemRoute=require(path.join(__dirname,'routes','problemRoutes.js'));
-const testcaseRoute=require(path.join(__dirname,'routes','testcaseRoutes.js'));
+
+/*===================== importing routers========================================*/
+const authRouter=require(path.join(__dirname,'routes','authRoutes.js'));
+const userRouter=require(path.join(__dirname,'routes','userSubmissionRoutes.js'));
+const problemRouter=require(path.join(__dirname,'routes','problemRoutes.js'));
+const testcaseRouter=require(path.join(__dirname,'routes','testcaseRoutes.js'));
+
+
+/*========================importing middlewares========================================*/
+const authMiddleware=require(path.join(__dirname,'middleware','auth.js'));
+
 
 const app=express();
 dotenv.config();
@@ -37,10 +43,10 @@ then(conn=>{
 
 
 
-app.use('/auth',authRoute);
-app.use('/user',userRoute);
-app.use('/problem',problemRoute);
-app.use('/testcase',testcaseRoute);
+app.use('/auth',authRouter);
+app.use('/user',authMiddleware,userRouter);
+app.use('/problem',authMiddleware,problemRouter);
+app.use('/testcase',testcaseRouter);
 
 
 
