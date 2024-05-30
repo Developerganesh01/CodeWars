@@ -1,0 +1,18 @@
+.Dashboard-container{
+  width: 100%;
+  background-color:#E1F7F5;
+}
+.Dashboard__bargraph{
+width: 100%;
+padding: 6rem 1rem 0 1rem;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.Dashboard__piechart{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2rem;
+}

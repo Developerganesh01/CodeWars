@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Home.module.css";
+import styles from "../pages/Dashboard.module.css";
 import Loading from "../components/Loading";
 import Bargraph from "../components/Bargraph";
-import Piechart from "../components/Piechart";
+import Piegraph from "../components/Piegraph";
 function Dashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -21,10 +21,9 @@ function Dashboard() {
 
 
   return loading ? <Loading /> : 
-  <div>
-    <div><Bargraph/></div>
-    <div><Piechart/></div>
- 
+  <div className={styles["Dashboard-container"]}>
+    <div className={styles["Dashboard__bargraph"]}><Bargraph/></div>
+    <div className={styles["Dashboard__piechart"]}><Piegraph/></div>
   </div>;
 }
 export default Dashboard;
