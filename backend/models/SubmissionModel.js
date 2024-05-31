@@ -16,7 +16,12 @@ const SubmissionSchema=new mongoose.Schema({
     ref:'ProblemModel'
   },
   username:{
-    type:String
+    type:String,
+    required:true
+  },
+  language:{
+    type:String,
+    default:'CPP'
   }
 });
 const SubmissionModel=mongoose.model('SubmissionModel',SubmissionSchema);
