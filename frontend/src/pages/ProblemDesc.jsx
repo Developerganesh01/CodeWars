@@ -107,12 +107,8 @@ function ProblemDesc()
             code
           })
         });
-        if(!response.ok)
-          {
-            setVerdict('wrong answer');
-          }else{
-            setVerdict('accepted');
-          }
+        const data=await response.json();
+        setVerdict(data.verdict);
       }
   return(
     <div className={styles["problemdesc-container"]}>
