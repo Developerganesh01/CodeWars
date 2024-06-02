@@ -5,9 +5,14 @@
   align-items: center;
 }
 .header{
-  background-color:#0E46A3;
+  /* background-color:#0E46A3; */
+  margin: 1rem;
 }
 .main{
-  background-color:#E1F7F5;
-  min-height: 91vh;
+  /* background-color:#E1F7F5; */
+  margin: 1rem;
+  height: 90vh;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  overflow:scroll;
 }

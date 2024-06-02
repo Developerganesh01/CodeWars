@@ -1,4 +1,4 @@
-.problem-box{
+.submission-box{
   width: 100%;
   color:black;
   /* background-color:#fff; */
@@ -7,17 +7,23 @@
   grid-template-columns: 1fr 4fr 1fr;
   text-decoration: none;
 }
-.problem-box li{
+.submission-box li{
   list-style: none;
   border-right: 0.5px solid var(--color-grey-dark-1);
   padding: 1rem;
 }
-.problem-box__sr{
+.submission-box__verdic{
   text-align: center;
 }
-.problem-box__title{
+.submission-box__title{
 
 }
-.problem-box__rating{
+.submission-box__rating{
   text-align: center;
+}
+.acpt{
+  color: green;
+}
+.nacpt{
+  color: red;
 }

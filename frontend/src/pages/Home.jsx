@@ -51,7 +51,14 @@ const[problemsData,setProblemsData]=useState(null);
   }
   return (
          <div className={styles["home-container"]}>
+          <div className={styles["home-container__header"]}>
+            <li className={styles["home-container__header-sr"]}>#</li>
+            <li className={styles["home-container__header-title"]}>title</li>
+            <li className={styles["home-container__header-rating"]}>rating</li>
+          </div>
+          <div className={styles["home-container__content"]}>
           {problemsData}
+          </div>
          </div>
          );
 }

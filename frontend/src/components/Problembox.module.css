@@ -27,13 +27,13 @@
 .probleminput-box{
   background-color:#ccc;
   width: 48%;
-  border: 1rem solid black;
+  border: 0.2rem solid black;
 
 }
 .problemoutput-box{
   background-color:#ccc;
   width: 48%;
-  border: 1rem solid black;
+  border: 0.2rem solid black;
 }
 .probleminput-box p ,.problemoutput-box p{
   margin-bottom: 3rem;
@@ -43,4 +43,5 @@
   resize: none;
   height:30vh;
   padding: 1rem;
+
 }

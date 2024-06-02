@@ -38,5 +38,6 @@ html{
 body{
   box-sizing: border-box;
   font-size: 1.6rem;
-  padding: 1rem;
+  padding:1rem 10vw;
+  background-color: #fff;
 }

@@ -104,7 +104,8 @@ function ProblemDesc()
             'Content-Type':'application/json'
           },
           body:JSON.stringify({
-            code
+            code,
+            language:"cpp"
           })
         });
         const data=await response.json();

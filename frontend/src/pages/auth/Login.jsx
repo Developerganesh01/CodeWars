@@ -49,13 +49,14 @@ function Login()
   }
   return (
     <form onSubmit={handleSubmit} className={styles["form-box"]}>
+      <div className={styles["form-box__header"]}>
+        login 
+      </div>
       <div className={styles["form-box__input-box"]}>
-        <label htmlFor="username">username :</label>
         <input required id="username"type="text" name="username" placeholder="username" onChange={handleChange} />
       </div>
       <div className={styles["form-box__input-box"]}>
-        <label htmlFor="password">password :</label>
-        <input required id="password" name="password" type="password" onChange={handleChange}/>
+        <input required id="password" name="password" placeholder="password" type="password" onChange={handleChange}/>
       </div>
       <button type="submit" className={styles["form-btn"]}>Login</button>
       <a href="/signup">signup ?</a>

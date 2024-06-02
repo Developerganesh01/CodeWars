@@ -53,7 +53,14 @@ function Submission() {
   }
   return (
     <div className={styles["submission-container"]}>
+      <div className={styles["submission-container__header"]}>
+        <li className={styles["submission-container__header-verdict"]}>verdict</li>
+        <li className={styles["submission-container__header-title"]}>problem title</li>
+        <li className={styles["submission-container__header-rating"]}>rating</li>
+      </div>
+      <div className={styles["submission-container__content"]}>
       {submissionsData}
+      </div>
     </div>
   );
 }

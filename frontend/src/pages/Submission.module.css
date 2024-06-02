@@ -1,9 +1,40 @@
 .submission-container{
   width: 100%;
-  min-height: 89vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background-color:#1E0342;
+}
+
+.submission-container__header{
+  width: 100%;
+  list-style: none;
+  font-weight: bold;
+  text-transform: capitalize;
+  height:10vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  padding: 1rem;
+  justify-items: center;
+  align-items: end;
+}
+.submission-container__header-verdict{
+  
+  
+}
+.submission-container__header-title{
+
+}
+.submission-container__header-rating{
+  
+}
+.submission-container__content{
+  width: 100%;
+}
+.submission-container__content > :nth-child(2n+1)
+{
+  background-color:#eee;
+}
+.submission-container__content > :last-child{
+  border-bottom:0.5px solid black;
 }

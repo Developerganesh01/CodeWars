@@ -57,17 +57,17 @@ function SignUp()
   }
   return (
     <form onSubmit={handleSubmit} className={styles["form-box"]}>
+      <div className={styles["form-box__header"]}>
+        signup
+      </div>
       <div className={styles["form-box__input-box"]}>
-        <label htmlFor="username">username :</label>
         <input required id="username"type="text" name="username" placeholder="username" onChange={handleChange} />
       </div>
       <div className={styles["form-box__input-box"]}>
-        <label htmlFor="email">email :</label>
         <input required id="email" name="email" type="email" placeholder="example@gmail.com" onChange={handleChange}/>
       </div>
       <div className={styles["form-box__input-box"]}>
-        <label htmlFor="password">password :</label>
-        <input required id="password" name="password" type="password" onChange={handleChange}/>
+        <input required id="password" name="password" placeholder="password" type="password" onChange={handleChange}/>
       </div>
       <button type="submit" className={styles["form-btn"]}>Sign Up</button>
        <a href="/login">Login ?</a>

@@ -1,7 +1,7 @@
 
 .problemdesc-container{
   width: 100%;
-  background-color:#E1F7F5;
+  /* background-color:#E1F7F5; */
   color: #fff;
   height: 89vh;
   display: flex;
@@ -12,14 +12,15 @@
   background-color:#999;
   text-align: center;
   margin-top: 1rem;
-  border: 0.5rem solid black;
+  border: 0.2rem solid black;
 }
 .problemdesc-container__left textarea{
   margin-top: 3rem;
   height: 70vh;
-  resize: none;
+  resize:none;
   width: 100%;
   padding: 1rem;
+  /* overflow: scroll; */
 }
 .problemdesc-container__right{
   width: 49%;
