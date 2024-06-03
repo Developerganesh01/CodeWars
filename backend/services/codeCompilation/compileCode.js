@@ -5,6 +5,7 @@ const{exec}=require("promisify-child-process");
 
 async function compileCode(language,code){
   //create code folder and src file if does't exist
+  
   const codeFolder=path.join(__dirname,"..","..","code");
   const codeFilePath=path.join(__dirname,"..","..","code",`${uuidv4()}.${language}`);
   try{
@@ -22,9 +23,9 @@ async function compileCode(language,code){
   exefilepath (executing) 
   so return "exefilepath"
   2)java
-  javac filepath (compiling)
-  java -cp "directorypath fileName" (executing) 
-  so return directotypath fileName
+  javac filename.java (compiling)
+  java  fileName" (executing) 
+  so return filename (filename should be same as of className containing main method)
   3)Python (interpreter)
   python filepath (runing ) 
   so  return codefilepath only
@@ -40,12 +41,29 @@ async function compileCode(language,code){
   }
  }else if(language==="java"){
   try{
-    const directoryFilePath=codeFilePath.split("code")[0]+"code";
-    const fileName=codeFilePath.split("code")[1].split(".")[0];
-    const child=exec(`javac ${codeFilePath}`);
-    await child;
-    return directoryFilePath+" "+fileName;
+    //extract class name from main method
+    const arr=code.match(
+      /(public\s+)?class\s+(\w+)[\s\S]*?public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*args\s*\)/
+  );
+   const className=arr[2];
+  console.log("classname is "+arr[2]);
+  const compiledFilePath2=path.join(codeFolder,`${className}.java`);
+  try{
+    await writeFile(compiledFilePath2,code);
+
+  }catch(err)
+  {
+    console.log("error while writing file");
+    throw err;
+  }
+  //compilenow
+  const child=exec(`javac ${compiledFilePath2}`);
+ await child;
+ console.log("path="+path.join(codeFolder,className));
+ return path.join(codeFolder,`[]${className}`);
   }catch(err){
+    console.log("compilation err here it is line 65");
+    console.log(err);
     throw err;
   }
  }else if(language==="py"){

@@ -59,9 +59,9 @@ async function submitCode(req, res) {
   //for each testcase run code and match output with computed output
   // console.log("testcaseData: "+testcaseData);
   //compile first
-  let exeFilePath;
+  let compiledFilePath;
   try{
-   exeFilePath=await compileCode(language,code);
+    compiledFilePath=await compileCode(language,code);
   //  console.log("exefile: "+exeFilePath);
   }catch(err){
     // console.log(err.message.split(".exe")[1].split(".cpp:")[1]);
@@ -76,29 +76,36 @@ async function submitCode(req, res) {
    await submission.save();
     return res.status(400).json({
       verdict:"compilation Error",
-      msg:err.message
+      msg:err
     });
   }
+  // if(language=="java"){
+  //   res.status(200).send("see array");return;
+  // }
   //executeCode(language,code,output,input,compiledFilePath);
-  let outputpromises = testcaseData.map(async function(testcase)  {
+  let outputpromises = testcaseData.map(async function(testcase){
     try{
-      const result=await executeCode(language,code,testcase.output,testcase.input,exeFilePath);
+      const result=await executeCode(language,testcase.output,testcase.input,compiledFilePath);
       console.log("testCase result: "+result);
       return result;
     }catch(err)
     {
+      console.log(err);
       return {
         verdict:"error"
       }
     }
   });
-  // console.log(outputpromises);
+  console.log(outputpromises);
   try {
     outputpromises = await Promise.all(outputpromises);
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json({
+      verdict:"compilation error",
+      msg:err.message
+    });
   }
-  // console.log(outputpromises);
+  console.log(outputpromises);
   let err=false;
   let cerr=false;
   for(let index=0;index<outputpromises.length;index+=1){
