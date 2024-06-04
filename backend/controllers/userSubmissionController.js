@@ -16,10 +16,9 @@ async function getAllSubmissions (req, res) {
   //send data as array of objects[{},{}] each object contains submission id ,problem title,verdict
   const submissionData = await SubmissionModel.find(
     { username },
-    "_id problemId verdict"
+    "_id problemId verdict language"
   )
-    .sort({ submissionTime: -1 })
-    .limit(10);
+    .sort({ submissionTime: -1 });
   //now we have array of object,object have submissionid,problemid fields
   //from problemid read problem title and send new array of object containing submission id and title
   //sending submission id will be useful next time ,when user wants to
@@ -33,6 +32,7 @@ async function getAllSubmissions (req, res) {
       title,
       verdict: obj.verdict,
       rating,
+      language:obj.language
     };
   });
   data = await Promise.all(data);
@@ -86,7 +86,7 @@ async function submitCode(req, res) {
   let outputpromises = testcaseData.map(async function(testcase){
     try{
       const result=await executeCode(language,testcase.output,testcase.input,compiledFilePath);
-      console.log("testCase result: "+result);
+      // console.log("testCase result: "+result);
       return result;
     }catch(err)
     {
@@ -96,7 +96,7 @@ async function submitCode(req, res) {
       }
     }
   });
-  console.log(outputpromises);
+  // console.log(outputpromises);
   try {
     outputpromises = await Promise.all(outputpromises);
   } catch (err) {
@@ -105,7 +105,7 @@ async function submitCode(req, res) {
       msg:err.message
     });
   }
-  console.log(outputpromises);
+  // console.log(outputpromises);
   let err=false;
   let cerr=false;
   for(let index=0;index<outputpromises.length;index+=1){
@@ -139,7 +139,7 @@ async function submitCode(req, res) {
   try {
     await submission.save();
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).send("something wrong!!!");
   }
   res.status(201).json(submission);

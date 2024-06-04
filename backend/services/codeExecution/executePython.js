@@ -8,7 +8,7 @@ async function executePython(output,input,compiledFilePath)
     const {stdout,stderr}=await child;
     if(stderr)
       {
-        console.log(stderr);
+        // console.log(stderr);
         return{
           verdict:"error",
           msg:stderr
@@ -25,7 +25,7 @@ async function executePython(output,input,compiledFilePath)
     }
   }catch(err)
   {
-    console.log(err);
+    // console.log(err);
     return{
       verdict:"error",
       msg:err.message

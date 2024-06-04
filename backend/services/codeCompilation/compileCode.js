@@ -13,7 +13,7 @@ async function compileCode(language,code){
     await writeFile(codeFilePath,code);
   }catch(err)
   {
-    console.log(err);
+    // console.log(err);
     throw new Error("error while creating files");
   }
   //compile code and return compiled file path
@@ -46,24 +46,24 @@ async function compileCode(language,code){
       /(public\s+)?class\s+(\w+)[\s\S]*?public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*args\s*\)/
   );
    const className=arr[2];
-  console.log("classname is "+arr[2]);
+  // console.log("classname is "+arr[2]);
   const compiledFilePath2=path.join(codeFolder,`${className}.java`);
   try{
     await writeFile(compiledFilePath2,code);
 
   }catch(err)
   {
-    console.log("error while writing file");
+    // console.log("error while writing file");
     throw err;
   }
   //compilenow
   const child=exec(`javac ${compiledFilePath2}`);
  await child;
- console.log("path="+path.join(codeFolder,className));
+//  console.log("path="+path.join(codeFolder,className));
  return path.join(codeFolder,`[]${className}`);
   }catch(err){
-    console.log("compilation err here it is line 65");
-    console.log(err);
+    // console.log("compilation err here it is line 65");
+    // console.log(err);
     throw err;
   }
  }else if(language==="py"){

@@ -12,6 +12,7 @@ function ProblemDesc()
   const[code,setCode]=useState("");
   const[descData,setdescData]=useState(null);
   const[verdict,setVerdict]=useState("");
+  const[language,setLanguage]=useState("cpp");
   const navigate=useNavigate();
   useEffect(()=>{
 
@@ -64,6 +65,11 @@ function ProblemDesc()
         setCode(e.target.value);
         // console.log(e.target.value);
       }
+      //handleLanguageCjange for submission
+      function handleLanguageChange(e){
+        setLanguage(e.target.value);
+        // console.log(e.target.value);
+      }
       //handleRun
       async function handleRun()
       {
@@ -105,7 +111,7 @@ function ProblemDesc()
           },
           body:JSON.stringify({
             code,
-            language:"cpp"
+            language
           })
         });
         const data=await response.json();
@@ -114,7 +120,11 @@ function ProblemDesc()
   return(
     <div className={styles["problemdesc-container"]}>
       <div className={styles["problemdesc-container__left"]}>
-        <p>compiler</p>
+       <select onChange={handleLanguageChange}>
+        <option value="cpp">C++</option>
+        <option value="java">JAVA</option>
+        <option value="py">PYTHON</option>
+       </select>
         <textarea placeholder="//code here" name="code" onChange={handleCodeChange}></textarea>
         <div className={styles["pdesc-footer"]}>
           <button onClick={handleRun}>Run</button>

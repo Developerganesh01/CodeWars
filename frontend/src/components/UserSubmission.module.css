@@ -4,7 +4,7 @@
   /* background-color:#fff; */
   border-top:0.5px solid black;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 1fr 4fr 1fr;
   text-decoration: none;
 }
 .submission-box li{
@@ -13,6 +13,9 @@
   padding: 1rem;
 }
 .submission-box__verdic{
+  text-align: center;
+}
+.submission-box__language{
   text-align: center;
 }
 .submission-box__title{

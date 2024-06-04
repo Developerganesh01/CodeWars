@@ -30,7 +30,8 @@ function Submission() {
         }
         setAuth(true);
         const data=await response.json();
-        //data contains array of object ,objects field are=>submissionid,title,verdict,rating
+        //data contains array of object ,objects field are=>submissionid,title,verdict,rating,language
+        console.log(data);
         const temp=data.map((obj)=>{
           return (
             <UserSubmissions obj={obj}/>
@@ -55,6 +56,7 @@ function Submission() {
     <div className={styles["submission-container"]}>
       <div className={styles["submission-container__header"]}>
         <li className={styles["submission-container__header-verdict"]}>verdict</li>
+        <li className={styles["submission-container__header-language"]}>language</li>
         <li className={styles["submission-container__header-title"]}>problem title</li>
         <li className={styles["submission-container__header-rating"]}>rating</li>
       </div>
