@@ -31,7 +31,7 @@ function Submission() {
         setAuth(true);
         const data=await response.json();
         //data contains array of object ,objects field are=>submissionid,title,verdict,rating,language
-        console.log(data);
+        // console.log(data);
         const temp=data.map((obj)=>{
           return (
             <UserSubmissions obj={obj}/>

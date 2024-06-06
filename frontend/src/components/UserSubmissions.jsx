@@ -4,7 +4,7 @@ function UserSubmissions({obj})
 {
   // console.log(obj);
   const {_id,title,rating,verdict,language}=obj;
-  console.log(language);
+  // console.log(language);
   return (
     <Link className={styles["submission-box"]} to={`/submission/${_id}`}>
       <li className={`${styles["submission-box__verdict"]} ${verdict==='accepted'?styles["acpt"]:styles["nacpt"]}`}>

@@ -8,6 +8,7 @@ import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp"
 import "./App.css"
 import ProblemDesc from "./pages/ProblemDesc";
+import ParticularSubmission from "./pages/ParticularSubmission";
 
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
 
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>}/>
-        <Route path="submission" element={<Submission/>}/>
+        <Route path="submission"  element={<Submission/>}/>
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
         <Route path="problem/:id" element={<ProblemDesc/>} />
+        <Route path="submission/:id"  element={<ParticularSubmission/>}/>
       </Route>
       
     </Routes>

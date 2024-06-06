@@ -1,0 +1,23 @@
+.submission-container{
+  /* background-color: red; */
+display: grid;
+min-height: 88vh;
+grid-template-rows: 1fr 15fr;
+row-gap: 1rem;
+padding: 0.5rem;
+}
+.submission-container__header{
+/* background-color: orange; */
+font-size: 2rem;
+color:slategray;
+display: flex;
+align-items: end;
+justify-content: center;
+}
+.submission-container__content{
+  /* background-color: pink; */
+  padding: 1rem;
+  border: 1rem solid #ccc;
+  background-color: black;
+  color: #fff;
+}
