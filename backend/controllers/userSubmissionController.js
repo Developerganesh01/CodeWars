@@ -1,4 +1,5 @@
 
+const { json } = require("express");
 const path = require("path");
 const ProblemModel = require(path.join(__dirname,"..","models","ProblemModel.js"));
 const SubmissionModel = require(path.join(__dirname,"..","models","SubmissionModel.js"));
@@ -180,5 +181,17 @@ function runCode(req,res)
     output:"runs"
   })
 }
+async function  getSubmission(req,res){
+  const submissionId=req.params.id;
+  // console.log(submissionId);
+  const submission=await SubmissionModel.findOne({
+    _id:submissionId
+  });
+  // console.log(submission);
+  res.status(200).json({
+    language:submission.language,
+    code:submission.code
+  });
+}
 
-module.exports ={getAllSubmissions,runCode,submitCode}
+module.exports ={getAllSubmissions,runCode,submitCode,getSubmission}
