@@ -2,15 +2,15 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-const data = [
-  { name: 'Accepted', value: 400 },
-  { name: 'Wrong Answer', value: 300 },
-  { name: 'Compilation Error', value: 200 }
-];
+// const data = [
+//   { name: 'Accepted', value: 400 },
+//   { name: 'Wrong Answer', value: 300 },
+//   { name: 'Compilation Error', value: 200 }
+// ];
 
 const COLORS = ['#7ed56f', '#FF8042', '#FFBB28'];
 
-function Piegraph() {
+function Piegraph({data}) {
   return (
     <PieChart  width={400} height={400} margin={{ top:20 ,right:0}}>
       <Pie
