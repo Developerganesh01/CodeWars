@@ -21,3 +21,9 @@ ul{
   /* font-weight: bold; */
   font-weight: 800;
 }
+.logout-btn{
+  text-decoration: underline;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+}
