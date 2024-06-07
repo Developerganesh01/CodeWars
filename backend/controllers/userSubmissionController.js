@@ -175,7 +175,7 @@ async function submitCode(req, res) {
 //     return res.status(400).send("something wrong");
 //   }
 // }
-function runCode(req,res)
+function runCode(read,res)
 {
   res.status(200).json({
     output:"runs"
@@ -193,5 +193,51 @@ async function  getSubmission(req,res){
     code:submission.code
   });
 }
+async function getBarData(req,res){
+  const username=req.username;
+  const dataArray=await SubmissionModel.find({username,verdict:"accepted"},"problemId");
+  const alreadyCounted=new Map();
+  const ratingFrequency=new Map();
+  //if same problem is solved for multiple times it should be counted as one 
+ const promiseArray=dataArray.map(async function(obj,index){
+  if(!alreadyCounted.has(obj.problemId)){
+    alreadyCounted.set(obj.problemId,1);
+    const {rating}=await ProblemModel.findOne({_id:obj.problemId});
+    if(ratingFrequency.has(rating)){
+      ratingFrequency.set(rating,ratingFrequency.get(rating)+1);
+    }else{
+      ratingFrequency.set(rating,1);
+    }
+  }
+  return "solved";
+ });
+ const response=await Promise.all(promiseArray);
+ //now i have data
+ const data=[];
+ for(const arr of ratingFrequency){
+  data.push({
+    rating:arr[0],
+    solved:arr[1]
+  })
+ }
+ res.status(200).json(data);
+}
+async function getPieData(req,res){
+  const username=req.username;
+  const accept=await SubmissionModel.countDocuments({verdict:"accepted"});
+  const wa=await SubmissionModel.countDocuments({verdict:"wrong answer"});
+  const cmperr=await SubmissionModel.countDocuments({verdict:"compilation error"});
+  const data=[{name:"Accepted",value:accept},
+    {name:"Wrong answer",value:wa},{name:"compilation error",value:cmperr}];
+    res.status(200).json(data);
+}
+async function logout(req,res){
 
-module.exports ={getAllSubmissions,runCode,submitCode,getSubmission}
+  res.clearCookie('token',{
+    httpOnly:true,
+  });
+  res.status(200).send("loged out successfully");
+}
+
+
+module.exports ={getAllSubmissions,runCode,submitCode,getSubmission,getBarData,getPieData,logout};
