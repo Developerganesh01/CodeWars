@@ -224,9 +224,9 @@ async function getBarData(req,res){
 }
 async function getPieData(req,res){
   const username=req.username;
-  const accept=await SubmissionModel.countDocuments({verdict:"accepted"});
-  const wa=await SubmissionModel.countDocuments({verdict:"wrong answer"});
-  const cmperr=await SubmissionModel.countDocuments({verdict:"compilation error"});
+  const accept=await SubmissionModel.countDocuments({username,verdict:"accepted"});
+  const wa=await SubmissionModel.countDocuments({username,verdict:"wrong answer"});
+  const cmperr=await SubmissionModel.countDocuments({username,verdict:"compilation error"});
   const data=[{name:"Accepted",value:accept},
     {name:"Wrong answer",value:wa},{name:"compilation error",value:cmperr}];
     res.status(200).json(data);
