@@ -1,5 +1,5 @@
 #Using node-18:alpine as a base image
-FROM node-18:alpine
+FROM node:18-alpine
 #setting working directory
 WORKDIR /app
 #install gcc, python and jdk
