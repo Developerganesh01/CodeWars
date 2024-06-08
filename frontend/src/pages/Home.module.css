@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  position: relative;
 }
 
 .home-container__header{
@@ -13,7 +14,7 @@
   text-transform: capitalize;
   height:10vh;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr ;
   padding: 1rem;
   justify-items: center;
   align-items: end;
@@ -37,4 +38,10 @@
 }
 .home-container__content > :last-child{
   border-bottom:0.5px solid black;
+}
+.sort-btn{
+  position:absolute;
+  right: 2rem;
+  border: none;
+  cursor: pointer;
 }

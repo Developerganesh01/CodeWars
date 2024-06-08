@@ -7,7 +7,9 @@ function Home() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState(true);
-const[problemsData,setProblemsData]=useState(null);
+const[problemsDataJsx,setProblemsDataJsx]=useState(null);
+const[problemData,setProblemData]=useState([]);
+const [toggleSort,setToggleSort]=useState(true);
   useEffect(()=>{
 
     async function getData(){
@@ -36,12 +38,45 @@ const[problemsData,setProblemsData]=useState(null);
               <Problem obj={obj}/>
           )
         })
-        setProblemsData(temp);
+        setProblemsDataJsx(temp);
+        setProblemData(data);
         setLoading(false);
     }
     getData();
   },[]);
-
+  function handleSort(){
+    if(toggleSort){
+      //sort in ascending order
+      setToggleSort(!toggleSort);
+      problemData.sort((problem1,problem2)=>{
+        return problem1.rating-problem2.rating
+      });
+      let ct=1;
+      const temp=problemData.map((obj)=>{
+        obj.ct=ct;
+        ct=ct+1;
+        return(
+          <Problem obj={obj} />
+        )
+      });
+      setProblemsDataJsx(temp);
+    }else{
+      //sort in descending order
+      setToggleSort(!toggleSort);
+      problemData.sort((problem1,problem2)=>{
+        return problem2.rating-problem1.rating; 
+      });
+      let ct=1;
+      const temp=problemData.map((obj)=>{
+        obj.ct=ct;
+        ct=ct+1;
+        return (
+          <Problem obj={obj} />
+        )
+      });
+      setProblemsDataJsx(temp);
+    }
+  }
   if (!loading && !auth) {
     navigate("/login");
     return;
@@ -55,9 +90,10 @@ const[problemsData,setProblemsData]=useState(null);
             <li className={styles["home-container__header-sr"]}>#</li>
             <li className={styles["home-container__header-title"]}>title</li>
             <li className={styles["home-container__header-rating"]}>rating</li>
+            <button className={styles["sort-btn"]} onClick={handleSort}>sort</button>
           </div>
           <div className={styles["home-container__content"]}>
-          {problemsData}
+          {problemsDataJsx}
           </div>
          </div>
          );
