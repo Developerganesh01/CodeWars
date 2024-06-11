@@ -32,7 +32,7 @@ async function compileCode(language,code){
   */
  if(language==="cpp"){
   try{
-    const exeFilePath=codeFilePath.split(".")[0]+".exe";
+    const exeFilePath=codeFilePath.split(".")[0]+".out";
     const child=exec(`g++ ${codeFilePath} -o ${exeFilePath}`);
     await child;
     return exeFilePath;

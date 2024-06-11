@@ -158,7 +158,7 @@ async function runCode (req, res) {
   const { id } = req.params;
   //create file in code folder and write code in that file
   const codefilepath = path.join(__dirname, "..", "code", `f${id}.cpp`);
-  const exefilepath = path.join(__dirname, "..", "code", `f${id}.exe`);
+  const exefilepath = path.join(__dirname, "..", "code", `f${id}.out`);
   try {
     await mkdir(path.join(__dirname, "..", "code"),{recursive:true});
     await writeFile(codefilepath, code);
@@ -225,7 +225,7 @@ async function getBarData(req,res){
  data.sort((obj1,obj2)=>{
   return obj1.rating-obj2.rating
  })
- console.log(data);
+//  console.log(data);
  res.status(200).json(data);
 }
 async function getPieData(req,res){
