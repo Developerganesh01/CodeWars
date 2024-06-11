@@ -45,3 +45,31 @@
   border: none;
   cursor: pointer;
 }
+.addproblem-container{
+  left: 2rem;
+  top:15rem;
+  position:fixed;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 1fr 1fr;
+  /* background-color: slateblue; */
+  background-image: linear-gradient(to right bottom,var(--color-primary-dark-1),var(--color-primary-light-1));
+  text-decoration: none;
+  z-index: 2;
+  color: #fff;
+  font-size: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6rem;
+  outline-offset: 0.5rem;
+  outline: 0.5rem inset var(--color-primary-light-1);
+}
+.addproblem-container:hover{
+  transform: scale(1.2);
+}
+.addproblem-container :nth-child(2){
+  font-size: 2rem;
+}

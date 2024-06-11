@@ -1,4 +1,4 @@
-import { BarChart, Bar,XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer ,Legend,Rectangle} from 'recharts';
+import { BarChart, Bar,XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer ,Legend} from 'recharts';
 
 // const data = [
 //   { rating: 500, solved: 5 },
@@ -13,7 +13,7 @@ export default function Bargraph({data}) {
     <BarChart data={data} margin={{ top:20 ,right:0}} barGap={-2}>
       <CartesianGrid strokeDasharray="5 5" />
       <XAxis dataKey="rating" label={{ value: 'Problem Rating', position: 'insideBottomRight', offset: -1 }} />
-      <YAxis label={{ value: 'Problems Solved', angle: -90, position: 'insideLeft' }} />
+      <YAxis  allowDecimals={false}  label={{ value: 'Problems Solved', angle: -90, position: 'insideLeft' }} />
       <Tooltip />
       <Legend />
       <Bar dataKey="solved" fill="#FF3366"  barSize={40}/>

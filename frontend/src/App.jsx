@@ -9,6 +9,7 @@ import SignUp from "./pages/auth/SignUp"
 import "./App.css"
 import ProblemDesc from "./pages/ProblemDesc";
 import ParticularSubmission from "./pages/ParticularSubmission";
+import ProblemAdd from "./pages/ProblemAdd";
 
 
 function App() {
@@ -25,10 +26,10 @@ function App() {
         <Route path="submission"  element={<Submission/>}/>
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
-        <Route path="problem/:id" element={<ProblemDesc/>} />
         <Route path="submission/:id"  element={<ParticularSubmission/>}/>
       </Route>
-      
+      <Route path="/problem/:id" element={<ProblemDesc/>} />
+      <Route path="/addproblem" element={<ProblemAdd/>}/>
     </Routes>
     </BrowserRouter>
     </>

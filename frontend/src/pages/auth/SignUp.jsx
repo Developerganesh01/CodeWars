@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
+import {ToastContainer,toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function SignUp()
 {
   const[formData,setFormData]=useState(null);
@@ -38,19 +40,19 @@ function SignUp()
       });
       if(!response.ok)
         {
-          console.log("error");
-          return ;
+          const obj=await response.json();
+          toast.error(obj.msg,{
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          return;
         }
-     const data=await response.json();
-      if(!data)
-        {
-          //something worng 
-          console.log("not good");
-        }
-      else{
-        //we get data 
         setLoading(false);
-      }
     }
     getData();
 
@@ -71,6 +73,7 @@ function SignUp()
       </div>
       <button type="submit" className={styles["form-btn"]}>Sign Up</button>
        <a href="/login">Login ?</a>
+       <ToastContainer/>
     </form>
   )
 }

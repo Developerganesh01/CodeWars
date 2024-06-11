@@ -29,6 +29,7 @@
 }
 html{
   font-size: 62.5%;
+  height: 100%;
 }
 *,*::before,*::after{
   box-sizing: inherit;
@@ -36,8 +37,8 @@ html{
   padding: 0;
 }
 body{
+  min-height: 100%;
   box-sizing: border-box;
   font-size: 1.6rem;
-  padding:1rem 10vw;
-  background-color: #fff;
+  /* padding:1rem 10vw; */
 }

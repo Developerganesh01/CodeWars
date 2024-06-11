@@ -2,47 +2,64 @@
 .problemdesc-container{
   width: 100%;
   /* background-color:#E1F7F5; */
-  color: #fff;
-  height: 89vh;
+  height: 100vh;
   display: flex;
   justify-content: space-between;
+  padding: 1rem;
 }
 .problemdesc-container__left{
-  width: 50%;
+  width: 56%;
   background-color:#999;
   text-align: center;
   margin-top: 1rem;
   border: 0.2rem solid black;
+  height: 95vh;
 }
-.problemdesc-container__left textarea{
-  margin-top: 3rem;
-  height: 70vh;
-  resize:none;
+.code-editor {
+  margin-top: 1rem;
   width: 100%;
-  padding: 1rem;
-  /* overflow: scroll; */
 }
+
 .problemdesc-container__right{
-  width: 49%;
+  width: 43%;
   color: black;
   font-size: 2rem;
   text-align: center;
+  border: 0.2rem solid black;
+  margin-top: 1rem;
+  overflow-y: scroll;
+  height: 95vh;
 }
 .pdesc-footer{
-  text-align: center;
+  /* border: 0.5rem solid black; */
+  height: 21vh;
+  overflow: auto;
+  display: grid;
+  row-gap: 0;
+  grid-template-rows: 1fr 5fr;
+}
+.pdesc-footer__header{
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
-.pdesc-footer button{
-  margin-top: 1rem;
+.pdesc-footer__content{
+  width: 100%;
+  border: 0.1rem solid black;
+}
+.pdesc-footer__content textarea{
+  width: 100%;
+  resize: none;
   padding: 1rem;
-  margin-right: 1rem;
-  width: 6rem;
-  transform: translateX(-50%);
+  height:100%;
+}
+.pdesc-footer button{
+  padding: 1rem;
+  min-width: 7rem;
+  /* transform: translateX(-50%); */
 }
 .act{
-  margin-top: 1rem;
+  margin: 1rem;
   font-size: 1.6rem;
   background-color:#28b485;
   padding: 0.8rem;
@@ -52,7 +69,7 @@
   content: "✅";
 }
 .nact{
-  margin-top: 1rem;
+  margin: 1rem;
   font-size: 1.6rem;
   background-color:#ffb900;;
   padding: 0.8rem;
@@ -60,4 +77,15 @@
 }
 .nact::after{
   content:"❌";
+}
+.active{
+  background-color: slateblue;
+  color: #fff;
+}
+.testcase-result{
+  width: 100%;
+  height:100%;
+  display: flex;
+  background-color: #fff;
+  padding: 1rem;
 }

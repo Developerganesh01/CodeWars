@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
+import {ToastContainer,toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function Login()
 {
   const[formData,setFormData]=useState(null);
@@ -24,7 +26,7 @@ function Login()
     //i do have formdata now
     async function getData()
     {
-      let data=await fetch('http://localhost:4000/auth/login',{
+      const response=await fetch('http://localhost:4000/auth/login',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
@@ -35,13 +37,18 @@ function Login()
           password:formData.password
         }),
       });
-      data=await data.json();
-      if(!data)
-        {
-          //something worng 
-        }
-      else{
-        //we get data 
+      if(!response.ok){
+        const obj=await response.json();
+        toast.error(obj.msg,{
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      }else{
         setLoading(false);
       }
     }
@@ -60,6 +67,7 @@ function Login()
       </div>
       <button type="submit" className={styles["form-btn"]}>Login</button>
       <a href="/signup">signup ?</a>
+      <ToastContainer/>
     </form>
   );
 }

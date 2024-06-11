@@ -1,0 +1,21 @@
+.passed{
+  color:#fff;
+  background-color:#7ed56f;
+  padding: 0.2rem;
+}
+.failed{
+  color:#fff;
+  background-color:#fd0054;
+  padding: 0.2rem;
+}
+.passed,.failed{
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  font-weight: bold;
+  min-width: 10rem;
+  height: 3.5rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

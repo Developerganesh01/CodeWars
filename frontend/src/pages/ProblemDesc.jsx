@@ -3,6 +3,10 @@ import { useParams,useNavigate} from "react-router-dom";
 import styles from "./ProblemDesc.module.css";
 import Loading from "../components/Loading";
 import Problembox from "../components/Problembox";
+// import SyntaxHighlighter from "react-syntax-highlighter";
+// import {vs2015 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import MonacoEditor from '@monaco-editor/react';
+import TestcaseResult from "../components/TestcaseResult";
 function ProblemDesc()
 {
 
@@ -13,6 +17,10 @@ function ProblemDesc()
   const[descData,setdescData]=useState(null);
   const[verdict,setVerdict]=useState("");
   const[language,setLanguage]=useState("cpp");
+  const[testResultContent,setTestResultContent]=useState("");
+  const[testcaseContent,setTestcaseContent]=useState("");
+  const[activeContent,setActiveContent]=useState(true);
+
   const navigate=useNavigate();
   useEffect(()=>{
 
@@ -53,22 +61,29 @@ function ProblemDesc()
 
       //state uplifting
       //handlinputData when user pastes input
-      function handleInputChange(obj)
+      function handleInputChange(e)
       {
-        //here obj is modified obj passsed by chid component 
-        //i.e. we have obj with updated sampleinput
-        setdescData(obj);
+        setTestcaseContent(e.target.value);
+        console.log(e.target.value);
       }
       //handleCodeChange
-      function handleCodeChange(e)
+      function handleCodeChange(val)
       {
-        setCode(e.target.value);
+        setCode(val);
         // console.log(e.target.value);
       }
       //handleLanguageCjange for submission
       function handleLanguageChange(e){
         setLanguage(e.target.value);
         // console.log(e.target.value);
+      }
+      //handleTestcaseActive
+      function handleTestcaseActive(){
+        setActiveContent(true);
+      }
+      //handleTestresultActive
+      function handleTestresultActive(){
+        setActiveContent(false);
       }
       //handleRun
       async function handleRun()
@@ -82,22 +97,16 @@ function ProblemDesc()
             'Content-Type':'application/json'
           },
           body:JSON.stringify({code:code,
-            input:descData.sampleinput
+            input:testcaseContent
           })
         })
-        if(!response.ok)
-          {
-            navigate('/login');
-            return;
-          }
+        if(!response.ok){
+          navigate("/login");
+        }
           const data=await response.json();
           //data is object contains output key
-          setdescData({
-            ...descData,
-            sampleoutput:data.output
-          })
-          
-          console.log('ok from client side');
+          setActiveContent(false);
+          setTestResultContent(data.output);
       }
       //handleSubmit
      async function handleSubmit()
@@ -114,8 +123,27 @@ function ProblemDesc()
             language
           })
         });
+        if(!response.ok){
+          navigate("/login");
+        }
         const data=await response.json();
+        console.log(data);
+        //if no compilation error
+        //data={veridct:,testcaseResult:[{verdict}]}
+        //else data={veridct,msg:error}
         setVerdict(data.verdict);
+        setActiveContent(false);
+        if(data.verdict!=="compilation error"){
+        const temp=data.testcaseResult.map((obj)=>{
+          return (
+            <TestcaseResult verdict={obj.verdict} />
+          )
+        });
+        setTestResultContent(temp);}
+        else{
+          setTestResultContent(data.msg);
+        }
+       
       }
   return(
     <div className={styles["problemdesc-container"]}>
@@ -125,15 +153,36 @@ function ProblemDesc()
         <option value="java">JAVA</option>
         <option value="py">PYTHON</option>
        </select>
-        <textarea placeholder="//code here" name="code" onChange={handleCodeChange}></textarea>
+       <div className={styles["code-editor"]}>
+          <MonacoEditor
+          height="70vh"
+          language={language === 'py' ? 'python' : language}
+          value={code}
+          onChange={handleCodeChange}
+          theme="vs-dark"
+        />
+       </div>
         <div className={styles["pdesc-footer"]}>
-          <button onClick={handleRun}>Run</button>
-          <button onClick={handleSubmit}>Submit</button>
-          <p className={verdict?(verdict==='accepted'?styles["act"]:styles["nact"]):""}>{verdict}</p>
+          <div className={styles["pdesc-footer__header"]}>
+            <button onClick={handleRun}>Run</button>
+            <button onClick={handleSubmit}>Submit</button>
+            <button className={activeContent?styles["active"]:""} onClick={handleTestcaseActive}>Testcase</button>
+            <button className={!activeContent?styles["active"]:""} onClick={handleTestresultActive}>TestResult</button>
+            <p className={verdict?(verdict==='accepted'?styles["act"]:styles["nact"]):""}>{verdict}</p>
+          </div>
+          <div className={styles["pdesc-footer__content"]}>
+            {activeContent&&<textarea onChange={handleInputChange}>{testcaseContent}</textarea>}
+            {!activeContent&&
+            <div className={styles["testcase-result"]}>
+              {testResultContent}
+            </div>
+              }
+          </div>
+          
         </div>
       </div>
       <div className={styles["problemdesc-container__right"]}>
-       {descData?<Problembox obj={descData} handleInputChange={handleInputChange} />:<Loading />}
+       {descData?<Problembox obj={descData} />:<Loading />}
       </div>
     </div>
   );

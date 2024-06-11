@@ -1,14 +1,15 @@
+
 .form-box{
-  margin-top: 20vh;
+  margin-top: 15vh;
   background-image: linear-gradient(to right bottom,#7ed56f,#FF6699);
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 0.3rem;
   width: 30vw;
-  margin-left: 25vw;
-  min-height: 60vh;
+  margin-left:35vw;
+  min-height: 70vh;
   border: 0.1rem solid black;
-  padding: 2rem;
+  padding: 3rem;
   text-align: center;
 }
 /* .form-box > :first-child{
@@ -38,6 +39,7 @@
   font-size: 1.6rem;
   letter-spacing: 0.2rem;
   background-color: #5643fa; 
+  cursor: pointer;
 }
 .form-box a,.form-box a:active,.form-box a:link,.form-box a:visited{
   text-decoration: none;
@@ -47,5 +49,5 @@
 .form-box__header{
   font-size: 4rem;
   text-transform: capitalize;
-  color:#000;
+  font-weight: bold;
 }

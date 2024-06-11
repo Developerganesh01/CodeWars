@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 import Loading from "../components/Loading";
 import Problem from "../components/Problem";
+import { NavLink } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState(true);
-const[problemsDataJsx,setProblemsDataJsx]=useState(null);
-const[problemData,setProblemData]=useState([]);
-const [toggleSort,setToggleSort]=useState(true);
+  const[problemsDataJsx,setProblemsDataJsx]=useState(null);
+  const[problemData,setProblemData]=useState([]);
+  const [toggleSort,setToggleSort]=useState(true);
+  const[role,setRole]=useState("user");
   useEffect(()=>{
 
     async function getData(){
@@ -29,17 +31,19 @@ const [toggleSort,setToggleSort]=useState(true);
           setAuth(true);
         }
         const data=await response.json();
-        //id title rating
+        //data={role,problemData:[{id,title,rating},{}..]}
         let ct=1;
-        const temp=data.map((obj)=>{
+        const temp=data.problemData.map((obj)=>{
           obj.ct=ct;
           ct=ct+1;
           return (
               <Problem obj={obj}/>
           )
         })
+        // console.log(data);
+        setRole(data.role);
         setProblemsDataJsx(temp);
-        setProblemData(data);
+        setProblemData(data.problemData);
         setLoading(false);
     }
     getData();
@@ -95,6 +99,9 @@ const [toggleSort,setToggleSort]=useState(true);
           <div className={styles["home-container__content"]}>
           {problemsDataJsx}
           </div>
+         {role==="problemsetter"&&<NavLink to="/addproblem"className={styles["addproblem-container"]}>
+            <span>problems</span><span>&#43;</span>
+          </NavLink>}
          </div>
          );
 }
