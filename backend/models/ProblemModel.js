@@ -2,7 +2,8 @@ const mongoose=require('mongoose');
 const ProblemSchema=new mongoose.Schema({
   title:{
     type:String,
-    required:[true,"problem must have a title"]
+    required:[true,"problem must have a title"],
+    unique:true
   },
   description:{
     type:String,
@@ -15,6 +16,14 @@ const ProblemSchema=new mongoose.Schema({
   sampleoutput:{
     type:String,
     required:[true,"povide sample output"]
+  },
+  inputformat:{
+    type:String,
+    required:true
+  },
+  outputformat:{
+    type:String,
+    required:true
   },
   rating:{
     type:Number,

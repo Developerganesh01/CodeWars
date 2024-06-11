@@ -30,7 +30,7 @@ app.use(express.urlencoded({extended:true}));
 
 
 
-const PORT=process.env.PORT || 7000;
+const PORT=process.env.PORT || 4000;
 const MONGODB_STRING=process.env.MONGODB_STRING;
 const MONGODB_USER=process.env.MONGODB_USER;
 const MONGODB_PASSWORD=process.env.MONGODB_PASSWORD;
@@ -46,7 +46,7 @@ then(conn=>{
 app.use('/auth',authRouter);
 app.use('/user',authMiddleware,userRouter);
 app.use('/problem',authMiddleware,problemRouter);
-app.use('/testcase',testcaseRouter);
+app.use('/testcase',authMiddleware,testcaseRouter);
 
 
 

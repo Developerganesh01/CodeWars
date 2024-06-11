@@ -6,23 +6,41 @@ async function getAll(req,res){
   //[{},{},.....] send array of problems which contains only problem id,title and problem rating
   //in find provide string for projection
   //when we use limit without sort random 10 documents will be fetched
+  const username=req.username;
+  const role=req.role;
   const problemData=await ProblemModel.find({},'_id title rating').limit(10);
-  res.status(200).json(problemData);
+  res.status(200).json({
+    role,
+    problemData});
 }
 
 async function create(req,res){
   //create problem and return 
+
+  //check for authorization
+  if(req.role!=="problemsetter"){
+    return res.status(400).json({
+      status:"failed",
+      msg:"permission denied !!!"
+    })
+  }
   //req.body contains details
-  const{title,description,sampleinput,sampleoutput,rating}=req.body;
-  if(!(title && description &&sampleinput &&sampleoutput &&rating)){
-    return res.status(400).send("provide all details for problem");
+  // console.log(req.body);
+  const{title,description,sampleinput,sampleoutput,rating,inputformat,outputformat}=req.body;
+  if(!(title && description && sampleinput && sampleoutput && rating && inputformat && outputformat)){
+    return res.status(400).json({
+      status:"failed",
+      msg:"provide all necessary details about problem"
+    });
   }
   const problem={
     title,
     description,
     sampleinput,
     sampleoutput,
-    rating    
+    rating,
+    inputformat,
+    outputformat    
   };
 
   const newproblem=new ProblemModel(problem);
@@ -31,10 +49,19 @@ async function create(req,res){
   }
   catch(err)
   {
-    console.log(err);
-    res.status(400).send("something went wrong");
+    // console.log(err);
+    res.status(400).json({
+      status:"failed",
+      msg:"something went wrong"
+    });
+    return ;
   }
-  res.status(201).json(newproblem);
+  // console.log(newproblem._id);
+  res.status(201).json({
+    status:"success",
+    msg:"problem saved",
+    problemId:newproblem._id
+  });
 }
 
 async function getDescription (req,res){

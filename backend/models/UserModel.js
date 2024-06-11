@@ -15,6 +15,10 @@ const UserSchema=new mongoose.Schema({
     type:String,
     required:[true,"provid password"],
     trim:true
+  },
+  role:{
+    type:String,
+    default:"user",
   }
 });
 

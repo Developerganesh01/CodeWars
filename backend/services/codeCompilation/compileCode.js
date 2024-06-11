@@ -45,6 +45,10 @@ async function compileCode(language,code){
     const arr=code.match(
       /(public\s+)?class\s+(\w+)[\s\S]*?public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*args\s*\)/
   );
+  if(!arr){
+    throw new Error("can't find main class");
+    return;
+  }
    const className=arr[2];
   // console.log("classname is "+arr[2]);
   const compiledFilePath2=path.join(codeFolder,`${className}.java`);

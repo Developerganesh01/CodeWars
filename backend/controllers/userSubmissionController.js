@@ -4,10 +4,10 @@ const path = require("path");
 const ProblemModel = require(path.join(__dirname,"..","models","ProblemModel.js"));
 const SubmissionModel = require(path.join(__dirname,"..","models","SubmissionModel.js"));
 const TestCaseModel = require(path.join(__dirname,"..","models","TestcaseModel.js"));
-
+const{writeFile,mkdir}=require("node:fs/promises");
 const compileCode=require(path.join(__dirname,"..","services","codeCompilation","compileCode.js"));
 const executeCode=require(path.join(__dirname,"..","services","codeExecution","executeCode.js"));
-
+const{exec}=require("promisify-child-process");
 
 async function getAllSubmissions (req, res) {
 
@@ -75,9 +75,10 @@ async function submitCode(req, res) {
       language
     });
    await submission.save();
-    return res.status(400).json({
-      verdict:"compilation Error",
-      msg:err
+  //  console.log(err);
+    return res.status(200).json({
+      verdict:"compilation error",
+      msg:err.stderr || err.message
     });
   }
   // if(language=="java"){
@@ -91,7 +92,7 @@ async function submitCode(req, res) {
       return result;
     }catch(err)
     {
-      console.log(err);
+      // console.log(err);
       return {
         verdict:"error"
       }
@@ -101,7 +102,7 @@ async function submitCode(req, res) {
   try {
     outputpromises = await Promise.all(outputpromises);
   } catch (err) {
-    return res.status(400).json({
+    return res.status(200).json({
       verdict:"compilation error",
       msg:err.message
     });
@@ -143,43 +144,44 @@ async function submitCode(req, res) {
     // console.log(err);
     return res.status(400).send("something wrong!!!");
   }
-  res.status(201).json(submission);
+  res.status(201).json({
+    verdict:submission.verdict,
+    testcaseResult:outputpromises
+  });
 }
 
 // //handle run
-// async function runCode (req, res) {
-//   //without saving in submission collection send output by running code
-//   // console.log(req.body);
-//   const { code, input } = req.body;
-//   const { id } = req.params;
-//   //create file in code folder and write code in that file
-//   const codefilepath = path.join(__dirname, "..", "code", `f${id}.cpp`);
-//   const exefilepath = path.join(__dirname, "..", "code", `f${id}.exe`);
-//   try {
-//     await writeFile(codefilepath, code);
-//     const child = exec(`g++ ${codefilepath} -o ${exefilepath} && ${exefilepath}`);
-//     child.stdin.write(input);
-//     child.stdin.end();
-//     const { stdout, stderr } = await child;
-//     if (stderr) {
-//       console.log(stderr);
-//       return res.status(200).json({
-//         output: "compilation error",
-//       });
-//     }
-//     res.status(200).json({
-//       output: stdout,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(400).send("something wrong");
-//   }
-// }
-function runCode(read,res)
-{
-  res.status(200).json({
-    output:"runs"
-  })
+async function runCode (req, res) {
+  //without saving in submission collection send output by running code
+  // console.log(req.body);
+  const { code, input } = req.body;
+  const { id } = req.params;
+  //create file in code folder and write code in that file
+  const codefilepath = path.join(__dirname, "..", "code", `f${id}.cpp`);
+  const exefilepath = path.join(__dirname, "..", "code", `f${id}.exe`);
+  try {
+    await mkdir(path.join(__dirname, "..", "code"),{recursive:true});
+    await writeFile(codefilepath, code);
+    const child = exec(`g++ ${codefilepath} -o ${exefilepath} && ${exefilepath}`);
+    child.stdin.write(input);
+    child.stdin.end();
+    const { stdout, stderr } = await child;
+    if (stderr) {
+     throw stderr;
+    }else{
+    res.status(200).json({
+      output: stdout,
+    });
+  }
+  } catch (err) {
+    // console.log(err);
+    return res.status(200).json(
+      {
+        verdict:"compilation Error",
+        output:err.stderr.split("cpp")[1]
+      }
+    );
+  }
 }
 async function  getSubmission(req,res){
   const submissionId=req.params.id;
@@ -220,6 +222,10 @@ async function getBarData(req,res){
     solved:arr[1]
   })
  }
+ data.sort((obj1,obj2)=>{
+  return obj1.rating-obj2.rating
+ })
+ console.log(data);
  res.status(200).json(data);
 }
 async function getPieData(req,res){
