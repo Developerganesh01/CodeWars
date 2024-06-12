@@ -16,7 +16,7 @@ function Dashboard() {
     //to do so make request user/Dashboard
     async function getData(){
       setLoading(false);
-      const response1=await fetch("http://localhost:4000/user/getbardata",{
+      const response1=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getbardata`,{
         method:"GET",
         credentials:"include"
       });
@@ -27,7 +27,7 @@ function Dashboard() {
       const data=await response1.json();
       setBarData(data);
       // console.log(data);
-      const response2=await fetch("http://localhost:4000/user/getpiedata",{
+      const response2=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/getpiedata`,{
         method:"GET",
         credentials:"include"
       });

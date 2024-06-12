@@ -75,7 +75,7 @@ function ProblemAdd(){
   //handeling addproblem
   async function handleAddProblem(){
     console.log(obj);
-    const response=await fetch("http://localhost:4000/problem/create",{
+    const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/problem/create`,{
       method:"POST",
       credentials:"include",
       headers:{
@@ -95,7 +95,7 @@ function ProblemAdd(){
   //handeling addtestcase
   async function handleAddTestcase(){
     console.log(testcaseData);
-    const response=await fetch("http://localhost:4000/testcase/create",{
+    const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/testcase/create`,{
       method:"POST",
       credentials:"include",
       headers:{

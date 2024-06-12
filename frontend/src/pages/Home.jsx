@@ -12,11 +12,12 @@ function Home() {
   const[problemData,setProblemData]=useState([]);
   const [toggleSort,setToggleSort]=useState(true);
   const[role,setRole]=useState("user");
+  console.log("process.env: "+process.env.REACT_APP_BACKEND_URL);
   useEffect(()=>{
 
     async function getData(){
 
-      const response=await fetch('http://localhost:4000/problem/getall',
+      const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/problem/getall`,
         {
           method:'GET',
           credentials:'include'

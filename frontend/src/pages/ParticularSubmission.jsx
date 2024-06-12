@@ -17,7 +17,7 @@ function ParticularSubmission(){
   const[auth,setAuth]=useState(false);
   useEffect(()=>{
     async function getData(){
-      const response=await fetch(`http://localhost:4000/user/viewsubmission/${submissionId}`,{
+      const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/viewsubmission/${submissionId}`,{
         method:'GET',
         credentials:'include'
       });

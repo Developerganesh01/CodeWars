@@ -5,7 +5,7 @@ function Header()
 {
   const navigate=useNavigate();
    async function handleLogout(){
-    const response=await fetch("http://localhost:4000/user/logout",{
+    const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/logout`,{
       method:"POST",
       credentials:"include",
     });

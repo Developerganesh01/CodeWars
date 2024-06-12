@@ -26,7 +26,7 @@ function ProblemDesc()
 
     async function getData()
     {
-      const response=await fetch(`http://localhost:4000/problem/${id}`,{
+      const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/problem/${id}`,{
         method:'GET',
         credentials:'include'
       });
@@ -90,7 +90,7 @@ function ProblemDesc()
       {
         // window.alert("running 🏃‍♂️🏃‍♂️🏃💨 !!!")
         //send post request server and get output 
-        const response=await fetch(`http://localhost:4000/user/run/${id}`,{
+        const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/run/${id}`,{
           method:'POST',
           credentials:'include',
           headers:{
@@ -112,7 +112,7 @@ function ProblemDesc()
      async function handleSubmit()
       {
         //send code
-        const response=await fetch(`http://localhost:4000/user/submit/${id}`,{
+        const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/submit/${id}`,{
           method:'POST',
           credentials:'include',
           headers:{

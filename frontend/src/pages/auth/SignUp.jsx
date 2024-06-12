@@ -26,7 +26,7 @@ function SignUp()
     //i do have formdata now
     async function getData()
     {
-      let response=await fetch('http://localhost:4000/auth/signup',{
+      let response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/signup`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
