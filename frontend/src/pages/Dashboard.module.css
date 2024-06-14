@@ -1,18 +1,27 @@
-.Dashboard-container{
-  width: 100%;
-  /* background-color:#E1F7F5; */
-}
-.Dashboard__bargraph{
-width: 100%;
-padding: 6rem 1rem 0 1rem;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.Dashboard__piechart{
+.Dashboard-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding-bottom: 2rem;
+  padding: 1rem;
+}
+
+.Dashboard__bargraph, .Dashboard__piechart {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .Dashboard__bargraph, .Dashboard__piechart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .Dashboard__bargraph {
+    margin-right: 1rem;
+  }
 }

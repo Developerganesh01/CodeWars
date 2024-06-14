@@ -1,75 +1,167 @@
-.home-container{
+:root {
+  --color-primary-1: #eb2f64;
+  --color-primary-light-1: #ff3366;
+  --color-primary-dark-1: #ba265d;
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+  --size-big: 3rem;
+  --size-small: 1.5rem;
+  --size-medium: 2.3rem;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+}
+
+.home-container {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   position: relative;
+  padding: 1rem;
 }
 
-.home-container__header{
+.home-container__header {
   width: 100%;
   list-style: none;
   font-weight: bold;
   text-transform: capitalize;
-  height:10vh;
+  height: 10vh;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr ;
+  grid-template-columns: 1fr 4fr 1fr;
   padding: 1rem;
   justify-items: center;
   align-items: end;
+  background-color: var(--color-grey-light-1);
+  border-bottom: 2px solid var(--color-grey-light-3);
 }
-.home-container__header-sr{
-  
-  
-}
-.home-container__header-title{
 
+.home-container__header-sr,
+.home-container__header-title,
+.home-container__header-rating {
+  font-size: 1.6rem;
+  text-align: center;
 }
-.home-container__header-rating{
-  
-}
-.home-container__content{
+
+.home-container__content {
   width: 100%;
+  background-color: var(--color-grey-light-1);
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
-.home-container__content > :nth-child(2n+1)
-{
-  background-color:#eee;
+
+.home-container__content > :nth-child(2n+1) {
+  background-color: var(--color-grey-light-2);
 }
-.home-container__content > :last-child{
-  border-bottom:0.5px solid black;
-}
-.sort-btn{
-  position:absolute;
+
+.sort-btn {
+  position: absolute;
   right: 2rem;
+  top: 1rem;
   border: none;
   cursor: pointer;
+  background-color: var(--color-primary-1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease;
 }
-.addproblem-container{
+
+.sort-btn:hover {
+  background-color: var(--color-primary-dark-1);
+}
+
+.addproblem-container {
+  position: fixed;
   left: 2rem;
-  top:15rem;
-  position:fixed;
-  display: grid;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: center;
-  grid-template-rows: 1fr 1fr;
-  /* background-color: slateblue; */
-  background-image: linear-gradient(to right bottom,var(--color-primary-dark-1),var(--color-primary-light-1));
+  justify-content: center;
+  background-color: var(--color-primary-1);
   text-decoration: none;
   z-index: 2;
   color: #fff;
-  font-size: 1rem;
-  border: 0.1rem solid black;
+  font-size: 1.6rem;
+  border: 2px solid var(--color-primary-light-1);
   border-radius: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.6rem;
-  outline-offset: 0.5rem;
-  outline: 0.5rem inset var(--color-primary-light-1);
+  letter-spacing: 0.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
-.addproblem-container:hover{
-  transform: scale(1.2);
+
+.addproblem-container:hover {
+  transform: scale(1.1);
+  background-color: var(--color-primary-dark-1);
 }
-.addproblem-container :nth-child(2){
+
+.addproblem-container span:nth-child(2) {
   font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .home-container__header {
+    font-size: 1.4rem;
+  }
+
+  .home-container__content {
+    font-size: 1.4rem;
+  }
+
+  .sort-btn {
+    font-size: 1.2rem;
+    right: 1rem;
+  }
+
+  .addproblem-container {
+    font-size: 1.4rem;
+    padding: 0.8rem;
+  }
+
+  .addproblem-container span:nth-child(2) {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container__header {
+    font-size: 1.2rem;
+  }
+
+  .home-container__content {
+    font-size: 1.2rem;
+  }
+
+  .sort-btn {
+    font-size: 1rem;
+    right: 0.5rem;
+  }
+
+  .addproblem-container {
+    font-size: 1.2rem;
+    padding: 0.6rem;
+  }
+
+  .addproblem-container span:nth-child(2) {
+    font-size: 1.6rem;
+  }
 }

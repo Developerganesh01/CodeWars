@@ -1,32 +1,80 @@
-.submission-box{
+.submission-box {
   width: 100%;
-  color:black;
-  /* background-color:#fff; */
-  border-top:0.5px solid black;
+  color: black;
+  border-top: 0.5px solid black;
   display: grid;
   grid-template-columns: 1fr 1fr 4fr 1fr;
   text-decoration: none;
 }
-.submission-box li{
+
+.submission-box li {
   list-style: none;
   border-right: 0.5px solid var(--color-grey-dark-1);
   padding: 1rem;
 }
-.submission-box__verdic{
-  text-align: center;
-}
-.submission-box__language{
-  text-align: center;
-}
-.submission-box__title{
 
-}
-.submission-box__rating{
+.submission-box__verdict {
   text-align: center;
 }
-.acpt{
+
+.submission-box__language {
+  text-align: center;
+}
+
+.submission-box__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.submission-box__rating {
+  text-align: center;
+}
+
+.acpt {
   color: green;
 }
-.nacpt{
+
+.nacpt {
   color: red;
+}
+
+@media (max-width: 768px) {
+  .submission-box {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .submission-box li {
+    border-right: none;
+    border-bottom: 0.5px solid var(--color-grey-dark-1);
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .submission-box__title {
+    grid-column: span 2;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+
+  .submission-box__verdict {
+    grid-row: 1;
+  }
+
+  .submission-box__language {
+    grid-row: 1;
+  }
+
+  .submission-box__title {
+    grid-row: 2;
+  }
+
+  .submission-box__rating {
+    grid-row: 3;
+  }
 }

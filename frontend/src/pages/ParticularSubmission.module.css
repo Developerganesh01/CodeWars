@@ -1,35 +1,67 @@
-.submission-container{
-  /* background-color: red; */
-display: flex;
-flex-direction: column;
-min-height: 88vh;
-/* grid-template-rows: 1fr 15fr;
-row-gap: 1rem; */
-padding: 0.5rem;
-}
-.submission-container__header{
-/* background-color: orange; */
-font-size: 2rem;
-color:slategray;
-display: flex;
-align-items: end;
-justify-content: center;
-margin-bottom: 2rem;
-}
-.submission-container__content{
-  /* background-color: pink; */
+.submission-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Adjusted to ensure full viewport height */
   padding: 1rem;
-  border: 1rem solid #ccc;
-  background-color: black;
-  color: #fff;
-  position: relative;
-  min-height: 85vh;
+  background-color: #f0f0f0; /* Light background for the container */
 }
-.copy-btn{
-  position:absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+
+.submission-container__header {
+  font-size: 2.5rem; /* Increased font size for header */
+  color: slategray;
+  text-align: center; /* Center align header */
+  margin-bottom: 2rem;
+}
+
+.submission-container__content {
+  flex: 1; /* Takes remaining vertical space */
+  padding: 1rem;
+  background-color: #2b2b2b; /* Dark background for code content */
+  color: #ffffff; /* White text */
+  position: relative;
+  overflow: hidden; /* Ensures no scrollbars on MonacoEditor */
+}
+
+.copy-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   padding: 0.5rem 2rem;
   cursor: pointer;
   text-transform: uppercase;
+  background-color: #007bff; /* Blue button background */
+  color: #ffffff; /* White button text */
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+@media (max-width: 768px) {
+  .submission-container__header {
+    font-size: 2rem; /* Adjusted font size for smaller screens */
+  }
+
+  .copy-btn {
+    padding: 0.5rem 1.5rem; /* Smaller padding for smaller screens */
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .submission-container__header {
+    font-size: 1.8rem; /* Further reduced font size for smallest screens */
+    margin-bottom: 1.5rem;
+  }
+
+  .copy-btn {
+    padding: 0.4rem 1.2rem; /* Reduced padding */
+    top: 0.3rem;
+    right: 0.3rem;
+  }
 }

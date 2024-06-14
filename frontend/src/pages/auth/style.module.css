@@ -1,36 +1,37 @@
-
-.form-box{
+.form-box {
   margin-top: 15vh;
-  background-image: linear-gradient(to right bottom,#7ed56f,#FF6699);
+  background-image: linear-gradient(to right bottom, #7ed56f, #FF6699);
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto;
   gap: 0.3rem;
-  width: 30vw;
-  margin-left:35vw;
+  width: 80vw;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
   min-height: 70vh;
   border: 0.1rem solid black;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-/* .form-box > :first-child{
-  margin-top: 3rem;
-} */
-.form-box__input-box{
+
+.form-box__input-box {
   margin: 0.3rem;
-  /* border: 1px solid black; */
 }
-.form-box__input-box input{
+
+.form-box__input-box input {
   width: 100%;
   border: 1px solid black;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 1rem;
 }
 
-.form-box__input-box input::placeholder{
-  font-size: 1.6rem;
-  letter-spacing: 0.5rem;
+.form-box__input-box input::placeholder {
+  font-size: 1.4rem;
+  letter-spacing: 0.3rem;
 }
-.form-btn{
+
+.form-btn {
   width: 100%;
   border: 0.1rem solid black;
   border-radius: 1rem;
@@ -41,13 +42,38 @@
   background-color: #5643fa; 
   cursor: pointer;
 }
-.form-box a,.form-box a:active,.form-box a:link,.form-box a:visited{
+
+.form-box a,
+.form-box a:active,
+.form-box a:link,
+.form-box a:visited {
   text-decoration: none;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
-.form-box__header{
-  font-size: 4rem;
+
+.form-box__header {
+  font-size: 3rem;
   text-transform: capitalize;
   font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .form-box {
+    width: 90vw;
+    padding: 1.5rem;
+  }
+
+  .form-box__input-box input {
+    padding: 1rem;
+  }
+
+  .form-box__header {
+    font-size: 2.5rem;
+  }
+
+  .form-box a {
+    font-size: 1.4rem;
+  }
 }

@@ -1,40 +1,118 @@
-.submission-container{
+.submission-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
 }
 
-.submission-container__header{
+.submission-container__header {
   width: 100%;
   list-style: none;
   font-weight: bold;
   text-transform: capitalize;
-  height:10vh;
   display: grid;
   grid-template-columns: 1fr 1fr 4fr 1fr;
-  padding: 1rem;
-  justify-items: center;
-  align-items: end;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
-.submission-container__header-verdict{
-  
-  
-}
-.submission-container__header-title{
 
+.submission-container__header li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
-.submission-container__header-rating{
-  
+
+.submission-container__header-verdict {
+  justify-content: flex-start;
+  padding-left: 20px;
 }
-.submission-container__content{
+
+.submission-container__header-language {
+  justify-content: center;
+}
+
+.submission-container__header-title {
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.submission-container__header-rating {
+  justify-content: center;
+}
+
+.submission-container__content {
   width: 100%;
 }
-.submission-container__content > :nth-child(2n+1)
-{
-  background-color:#eee;
+
+.submission-box {
+  width: 100%;
+  color: black;
+  border-top: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr 1fr;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
-.submission-container__content > :last-child{
-  border-bottom:0.5px solid black;
+
+.submission-box:hover {
+  background-color: #f9f9f9;
+}
+
+.submission-box li {
+  list-style: none;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.submission-box__verdict {
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.submission-box__language {
+  justify-content: center;
+}
+
+.submission-box__title {
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.submission-box__rating {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .submission-container__header {
+    grid-template-columns: 1fr;
+  }
+
+  .submission-container__header li {
+    padding: 10px;
+  }
+
+  .submission-box {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .submission-box li {
+    padding: 10px;
+  }
+
+  .submission-box__verdict,
+  .submission-box__language,
+  .submission-box__title,
+  .submission-box__rating {
+    justify-content: center;
+  }
 }

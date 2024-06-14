@@ -89,3 +89,34 @@
   background-color: #fff;
   padding: 1rem;
 }
+/* Ensure responsiveness */
+@media screen and (max-width: 768px) {
+  .problemdesc-container {
+    flex-direction: column; /* Stack containers vertically on smaller screens */
+    align-items: center; /* Center items vertically */
+  }
+
+  .problemdesc-container__left {
+    width: 100%; /* Take full width on smaller screens */
+    height: auto; /* Adjust height dynamically */
+    margin-top: 0; /* Remove top margin */
+  }
+
+  .problemdesc-container__right {
+    width: 100%; /* Take full width on smaller screens */
+    height: auto; /* Adjust height dynamically */
+    margin-top: 1rem; /* Add some space on top */
+  }
+
+  .pdesc-footer {
+    height: auto; /* Adjust height dynamically */
+  }
+
+  .pdesc-footer button {
+    min-width: auto; /* Allow buttons to adjust width dynamically */
+  }
+
+  .pdesc-footer__content textarea {
+    height: 10rem; /* Set a fixed height for textareas to avoid excessive height on mobile */
+  }
+}
