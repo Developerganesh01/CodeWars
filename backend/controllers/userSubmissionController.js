@@ -8,13 +8,11 @@ const{writeFile,mkdir}=require("node:fs/promises");
 const compileCode=require(path.join(__dirname,"..","services","codeCompilation","compileCode.js"));
 const executeCode=require(path.join(__dirname,"..","services","codeExecution","executeCode.js"));
 const{exec}=require("promisify-child-process");
+const { stdin } = require("process");
 
 async function getAllSubmissions (req, res) {
 
-  //data from authMiddleware
   const username=req.username;
-  //now from username take 10 recent submissions of that user
-  //send data as array of objects[{},{}] each object contains submission id ,problem title,verdict
   const submissionData = await SubmissionModel.find(
     { username },
     "_id problemId verdict language"
@@ -41,24 +39,13 @@ async function getAllSubmissions (req, res) {
 };
 
 async function submitCode(req, res) {
-  //id here is the problem id i.e for this problemId user have submission
-  //req.params will break url and gives you key value pir for parameters
   const problemId = req.params.id;
   const username=req.username;
-
   //submission schema=>submissionTime,code,verdict,problemId,username,language
-  //from client side we have alredy collected problemId,username
-  //now get code and save submissionTime
   const submissionTime = new Date();
   const { code,language} = req.body;
-  //run code and give verdict it is also a asynchronus work
   let verdict = "";
-  //run testcases to get verdict
-  //get array of object of testcases for this problemId
   const testcaseData = await TestCaseModel.find({ problemId });
-  //array of obj ,obj contains _id,input,output,problemId
-  //for each testcase run code and match output with computed output
-  // console.log("testcaseData: "+testcaseData);
   //compile first
   let compiledFilePath;
   try{
@@ -76,15 +63,13 @@ async function submitCode(req, res) {
     });
    await submission.save();
   //  console.log(err);
+  const Errormsg=err.message.split("."+language);
+  // console.log(Errormsg);
     return res.status(200).json({
       verdict:"compilation error",
-      msg:err.stderr || err.message
+      msg:"line"+Errormsg[2]
     });
   }
-  // if(language=="java"){
-  //   res.status(200).send("see array");return;
-  // }
-  //executeCode(language,code,output,input,compiledFilePath);
   let outputpromises = testcaseData.map(async function(testcase){
     try{
       const result=await executeCode(language,testcase.output,testcase.input,compiledFilePath);
@@ -94,7 +79,8 @@ async function submitCode(req, res) {
     {
       // console.log(err);
       return {
-        verdict:"error"
+        verdict:"error",
+        msg:err.message
       }
     }
   });
@@ -103,27 +89,30 @@ async function submitCode(req, res) {
     outputpromises = await Promise.all(outputpromises);
   } catch (err) {
     return res.status(200).json({
-      verdict:"compilation error",
+      verdict:"error",
       msg:err.message
     });
   }
   // console.log(outputpromises);
-  let err=false;
-  let cerr=false;
+  let iswrongAnswer=false;
+  let isCompilationError=false;
+  let Errormsg="none";
   for(let index=0;index<outputpromises.length;index+=1){
     if(outputpromises[index].verdict==="error")
       {
-        cerr=true;
+        isCompilationError=true;
+        Errormsg=outputpromises[index].msg;
         break;
       }
     else if(outputpromises[index].verdict==="wrong answer"){
-      err=true;
+      iswrongAnswer=true;
     }
   }
-  if(cerr)
+  if(isCompilationError)
     {
       verdict="compilation error";
-    }else if(err)
+      Errormsg=Errormsg.split("."+language)[2];
+    }else if(iswrongAnswer)
       {
         verdict="wrong answer";
       }
@@ -146,41 +135,63 @@ async function submitCode(req, res) {
   }
   res.status(201).json({
     verdict:submission.verdict,
-    testcaseResult:outputpromises
+    testcaseResult:outputpromises,
+    msg:Errormsg
   });
 }
 
-// //handle run
+// handle run
 async function runCode (req, res) {
-  //without saving in submission collection send output by running code
-  // console.log(req.body);
-  const { code, input } = req.body;
+
+  const { code, input,language } = req.body;
   const { id } = req.params;
-  //create file in code folder and write code in that file
-  const codefilepath = path.join(__dirname, "..", "code", `f${id}.cpp`);
-  const exefilepath = path.join(__dirname, "..", "code", `f${id}.out`);
-  try {
-    await mkdir(path.join(__dirname, "..", "code"),{recursive:true});
-    await writeFile(codefilepath, code);
-    const child = exec(`g++ ${codefilepath} -o ${exefilepath} && ${exefilepath}`);
-    child.stdin.write(input);
-    child.stdin.end();
-    const { stdout, stderr } = await child;
-    if (stderr) {
-     throw stderr;
-    }else{
-    res.status(200).json({
-      output: stdout,
-    });
-  }
-  } catch (err) {
-    // console.log(err);
-    return res.status(200).json(
-      {
-        verdict:"compilation Error",
-        output:err.stderr.split("cpp")[1]
+  try{
+    
+    const filePath=await compileCode(language,code);
+    if(language==="cpp"){
+      const child=exec(`g++ ${filePath}`);
+      child.stdin.write(input);
+      child.stdin.end();
+      const {stdout}=await child;
+      return res.status(200).json({
+        output:stdout
+      })
       }
-    );
+    else if(language==="py"){
+
+      const child=exec(`python ${filePath}`);
+      child.stdin.write(input);
+      child.stdin.end();
+      const {stdout}=await child;
+      return res.status(200).json({
+        output:stdout
+      })
+
+    }
+    else if(language==="java"){
+
+      const child=exec(`java ${filePath}`);
+      child.stdin.write(input);
+      child.stdin.end();
+      const{stdout}=await child;
+
+      return res.status(200).json({
+        output:stdout
+      })
+    }
+    else{
+      res.status(400).josn({
+        output:"Language not supported"
+      })
+      return;
+    }
+  }
+  catch(err)
+  {
+    console.log(err);
+    return res.status(200).json({
+      output:err.message
+    })
   }
 }
 async function  getSubmission(req,res){

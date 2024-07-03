@@ -46,8 +46,7 @@ async function compileCode(language,code){
       /(public\s+)?class\s+(\w+)[\s\S]*?public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*args\s*\)/
   );
   if(!arr){
-    throw new Error("can't find main class");
-    return;
+    throw new Error("java.can't find main class");
   }
    const className=arr[2];
   // console.log("classname is "+arr[2]);

@@ -8,7 +8,7 @@ async function getAll(req,res){
   //when we use limit without sort random 10 documents will be fetched
   const username=req.username;
   const role=req.role;
-  const problemData=await ProblemModel.find({},'_id title rating').limit(10);
+  const problemData=await ProblemModel.find({},'_id title rating');
   res.status(200).json({
     role,
     problemData});

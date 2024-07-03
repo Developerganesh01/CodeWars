@@ -19,12 +19,11 @@ const authMiddleware=require(path.join(__dirname,'middleware','auth.js'));
 const app=express();
 dotenv.config();
 
-
-app.use(cookieparser());
 app.use(cors({
-  origin:'http://localhost:3000',
-  credentials: true
+  origin:process.env.ORIGIN,
+  credentials:true
 }));
+app.use(cookieparser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
@@ -41,12 +40,15 @@ then(conn=>{
   console.log("connected to mongoDB"); 
 })
 
+//testing without sending toke cookie
+app.get("/test",(req,res)=>{
+  res.status(200).send("works fine")
+})
 
-
-app.use('/auth',authRouter);
-app.use('/user',authMiddleware,userRouter);
-app.use('/problem',authMiddleware,problemRouter);
-app.use('/testcase',authMiddleware,testcaseRouter);
+app.use('/api/auth',authRouter);
+app.use('/api/user',authMiddleware,userRouter);
+app.use('/api/problem',authMiddleware,problemRouter);
+app.use('/api/testcase',authMiddleware,testcaseRouter);
 
 
 
