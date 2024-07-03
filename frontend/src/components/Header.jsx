@@ -29,9 +29,9 @@ function Header()
       <li><NavLink to="/dashboard" className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
       }}>Dashboard</NavLink></li>
-      <li><NavLink to="/profile" className={({isActive})=>{
+      {/* <li><NavLink to="/profile" className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
-      }}>Profile</NavLink></li>
+      }}>Profile</NavLink></li> */}
       <button className={styles["logout-btn"]} onClick={handleLogout}>Log out</button>
     </ul>
     </div>

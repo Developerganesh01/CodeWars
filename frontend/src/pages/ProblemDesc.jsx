@@ -7,6 +7,7 @@ import Problembox from "../components/Problembox";
 // import {vs2015 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import MonacoEditor from '@monaco-editor/react';
 import TestcaseResult from "../components/TestcaseResult";
+import { ToastContainer ,toast} from "react-toastify";
 function ProblemDesc()
 {
 
@@ -53,13 +54,22 @@ function ProblemDesc()
       {
         return <Loading/>;
       }
-      //problembox is child component contains input ,output box to handle change
-      //in child component we will pass functions from parent to child and child calls
-      //this functions and sets state variable of parent here child
-      //will change sample input only output will be provided by browser
 
+      //display error msg if user try to submit/run empty code
+      function displayNoCodeError()
+      {
+        toast.success("Code is not provided !!!⬇️",{
+          position:"top-center",
+          autoClose:900,
+          hideProgressBar:false,
+          closeOnClick:true,
+          pauseOnHover:true,
+          draggable:true,
+          progress:undefined
+        })
+      }
 
-      //state uplifting
+  
       //handlinputData when user pastes input
       function handleInputChange(e)
       {
@@ -90,14 +100,20 @@ function ProblemDesc()
       {
         // window.alert("running 🏃‍♂️🏃‍♂️🏃💨 !!!")
         //send post request server and get output 
+        if(!code){
+          displayNoCodeError();
+          return;
+        }
         const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/run/${id}`,{
           method:'POST',
           credentials:'include',
           headers:{
             'Content-Type':'application/json'
           },
-          body:JSON.stringify({code:code,
-            input:testcaseContent
+          body:JSON.stringify({
+            code:code,
+            input:testcaseContent,
+            language
           })
         })
         if(!response.ok){
@@ -111,6 +127,11 @@ function ProblemDesc()
       //handleSubmit
      async function handleSubmit()
       {
+        if(!code)
+          {
+            displayNoCodeError();
+            return;
+          }
         //send code
         const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/submit/${id}`,{
           method:'POST',
@@ -127,10 +148,6 @@ function ProblemDesc()
           navigate("/login");
         }
         const data=await response.json();
-        console.log(data);
-        //if no compilation error
-        //data={veridct:,testcaseResult:[{verdict}]}
-        //else data={veridct,msg:error}
         setVerdict(data.verdict);
         setActiveContent(false);
         if(data.verdict!=="compilation error"){
@@ -143,7 +160,6 @@ function ProblemDesc()
         else{
           setTestResultContent(data.msg);
         }
-       
       }
   return(
     <div className={styles["problemdesc-container"]}>
@@ -184,6 +200,7 @@ function ProblemDesc()
       <div className={styles["problemdesc-container__right"]}>
        {descData?<Problembox obj={descData} />:<Loading />}
       </div>
+      <ToastContainer/>
     </div>
   );
 }
