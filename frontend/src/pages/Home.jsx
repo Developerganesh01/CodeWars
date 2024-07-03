@@ -12,7 +12,7 @@ function Home() {
   const[problemData,setProblemData]=useState([]);
   const [toggleSort,setToggleSort]=useState(true);
   const[role,setRole]=useState("user");
-  console.log("process.env: "+process.env.REACT_APP_BACKEND_URL);
+  // console.log("process.env: "+process.env.REACT_APP_BACKEND_URL);
   useEffect(()=>{
 
     async function getData(){
