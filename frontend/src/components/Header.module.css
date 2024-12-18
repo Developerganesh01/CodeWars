@@ -1,60 +1,94 @@
-.header-container {
+.header-container{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border: 0.1rem solid black;
-  border-radius: 1rem;
+  /* border: 0.1rem solid black; */
+  /* border-radius: 1rem; */
   padding: 1rem;
+  /* background: linear-gradient(to right bottom,#2E073F,#EBD3F8); */
+  position: relative;
+}
+.header-container::after{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.2rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(135deg, #ff6b6b, #ff9f43, #FF3366);
+  box-shadow: 0 .5rem 1rem rgba(0, 0,0,0.2);
 }
 
-.header-container__nav {
+.header-container__nav{
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-ul {
   list-style: none;
+  width: 30%;
 }
 
-.header-container__nav a {
+.header-container__nav  li a:link,
+.header-container__nav  li a:visited,
+.header-container__nav  li a:active
+{
+  display: inline-block;
   font-size: 2rem;
   text-decoration: none;
   text-transform: capitalize;
-  margin: 2rem;
+  text-decoration: none;
+  margin:1rem;
+  color:#1A1A1D;
+  position: relative;
+  margin-bottom: 0.2rem;
+}
+.active-btn::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  border: .1rem solid #1A1A1D;
+  animation:WidthIncrease 0.5s ease-in backwards;
 }
 
-.active-btn {
-  color: var(--color-primary-dark-2);
-  border-bottom: 0.2rem solid var(--color-primary-dark-2);
-  font-weight: bold;
-}
 
-.logout-btn {
-  text-decoration: underline;
-  font-size: 1.6rem;
-  border: none;
-  cursor: pointer;
+@keyframes WidthIncrease {
+  0%{
+    width: 0%;
+  }
+  100%{
+    width: 100%;
+  }
 }
-
+.header-container__logo{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  font-size: 4rem;
+}
+.header-container__logo span:nth-child(1)
+{
+  background: linear-gradient(135deg, #ff6b6b, #ff9f43, #f5a623);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
+.header-container__logo span:nth-child(3)
+{
+  background: linear-gradient(135deg, #ff6b6b, #ffb900, #f5a623);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
 .logo {
   height: 5rem;
   border-radius: 1rem;
   margin: 1rem;
 }
-
-.header-container__logo {
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-}
-
-.header-container__logo p {
-  letter-spacing: 0.1rem;
-  font-size: 2.5rem;
-}
-
 @media (max-width: 768px) {
   .header-container {
     flex-direction: column;

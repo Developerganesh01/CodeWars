@@ -4,21 +4,42 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem;
+  /* padding: 1rem 2rem;  */
 }
 
 .header {
   width: 100%;
-  margin: 1rem 0;
+  margin-bottom: 2rem;
 }
 
 .main {
-  width: 100%;
+  width: 95%;
   flex-grow: 1;
-  border: 0.1rem solid black;
+  border: 0.1rem solid #BA265D;
   border-radius: 1rem;
   overflow-y: auto;
 }
+
+.back-button {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  background: #fff;
+  border:0.1rem solid black;
+  border-radius: 10rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #eb2f64;
+}
+.back-button:hover{
+  transform: scale(1.1);
+}
+.back-button svg {
+  margin-right: 0.5rem;
+}
+
 
 @media (max-width: 768px) {
   .header, .main {

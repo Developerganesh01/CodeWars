@@ -2,7 +2,7 @@
 .problemdesc-container{
   width: 100%;
   /* background-color:#E1F7F5; */
-  height: 100vh;
+  height: 82vh;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -12,8 +12,9 @@
   background-color:#999;
   text-align: center;
   margin-top: 1rem;
-  border: 0.2rem solid black;
-  height: 95vh;
+  border: 0.1rem solid #1a1a1d;
+  height: 75vh;
+  overflow-y: scroll;
 }
 .code-editor {
   margin-top: 1rem;
@@ -25,15 +26,15 @@
   color: black;
   font-size: 2rem;
   text-align: center;
-  border: 0.2rem solid black;
+  border: 0.1rem solid #1a1a1d;
   margin-top: 1rem;
   overflow-y: scroll;
-  height: 95vh;
+  height: 75vh;
 }
 .pdesc-footer{
   /* border: 0.5rem solid black; */
-  height: 21vh;
-  overflow: auto;
+  height: 20vh;
+  /* overflow: auto; */
   display: grid;
   row-gap: 0;
   grid-template-rows: 1fr 5fr;
@@ -45,7 +46,7 @@
 }
 .pdesc-footer__content{
   width: 100%;
-  border: 0.1rem solid black;
+  border: 0.1rem solid #1a1a1d;
 }
 .pdesc-footer__content textarea{
   width: 100%;
@@ -79,7 +80,7 @@
   content:"❌";
 }
 .active{
-  background-color: slateblue;
+  background-color:#FF3366;
   color: #fff;
 }
 .testcase-result{
@@ -89,6 +90,31 @@
   background-color: #fff;
   padding: 1rem;
 }
+
+.language-opt{
+  width: 25rem;
+  margin-top: 0.4rem;
+  padding: 0.5rem;
+  font-size:1.5rem;
+  cursor: pointer;
+  background-color: #fff;
+  border: 0.2rem solid #ff9f43; 
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  color: #1A1A1D;
+}
+.language-opt:hover {
+  background-color: #ffe0b3; 
+  border-color: #f5a623; 
+  box-shadow: 0 0.6rem 0.8rem rgba(0, 0, 0, 0.15);
+}
+.language-opt:focus {
+  outline: none;
+  border-color: #ff6b6b; 
+  box-shadow: 0 0 1rem #ff6b6b;
+  background-color: #ffebe6; 
+}
+
 /* Ensure responsiveness */
 @media screen and (max-width: 768px) {
   .problemdesc-container {
@@ -109,14 +135,15 @@
   }
 
   .pdesc-footer {
-    height: auto; /* Adjust height dynamically */
+    height: auto; 
   }
 
   .pdesc-footer button {
-    min-width: auto; /* Allow buttons to adjust width dynamically */
+    min-width: auto;
   }
 
   .pdesc-footer__content textarea {
-    height: 10rem; /* Set a fixed height for textareas to avoid excessive height on mobile */
+    height: 10rem; 
   }
 }
+

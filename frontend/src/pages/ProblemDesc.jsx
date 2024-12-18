@@ -164,7 +164,7 @@ function ProblemDesc()
   return(
     <div className={styles["problemdesc-container"]}>
       <div className={styles["problemdesc-container__left"]}>
-       <select onChange={handleLanguageChange}>
+       <select onChange={handleLanguageChange} className={styles["language-opt"]}>
         <option value="cpp">C++</option>
         <option value="java">JAVA</option>
         <option value="py">PYTHON</option>

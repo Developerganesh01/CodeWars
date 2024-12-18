@@ -27,8 +27,9 @@ function App() {
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
         <Route path="submission/:id"  element={<ParticularSubmission/>}/>
+        <Route path="/problem/:id" element={<ProblemDesc/>} />
       </Route>
-      <Route path="/problem/:id" element={<ProblemDesc/>} />
+      {/* <Route path="/problem/:id" element={<ProblemDesc/>} /> */}
       <Route path="/addproblem" element={<ProblemAdd/>}/>
     </Routes>
     </BrowserRouter>

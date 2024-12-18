@@ -7,10 +7,12 @@
   text-decoration: none;
 }
 
-.submission-box li {
+.submission-box li{
   list-style: none;
-  border-right: 0.5px solid var(--color-grey-dark-1);
   padding: 1rem;
+}
+.submission-box li:not(li:last-child){
+  border-right: 0.5px solid var(--color-grey-dark-1);
 }
 
 .submission-box__verdict {

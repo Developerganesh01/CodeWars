@@ -16,8 +16,9 @@ function Header()
   return (
     <div className={styles["header-container"]}>
       <div className={styles["header-container__logo"]}>
-      <img src="./CodeWarsLogo.jpeg" alt="logo" className={styles["logo"]} />
-      <p>CodeWars</p>
+        <span>Code</span>
+        <img src="./CodeWarsLogo.jpeg" alt="logo" className={styles["logo"]} />
+        <span>Wars</span>
       </div>
       <ul className={styles["header-container__nav"]}>
       <li><NavLink to="/" className={({isActive})=>{
@@ -32,7 +33,7 @@ function Header()
       {/* <li><NavLink to="/profile" className={({isActive})=>{
         return isActive?styles["active-btn"]:null;
       }}>Profile</NavLink></li> */}
-      <button className={styles["logout-btn"]} onClick={handleLogout}>Log out</button>
+      <li><a href="#" className="logout-btn" onClick={handleLogout}>Logout</a></li>
     </ul>
     </div>
   )
